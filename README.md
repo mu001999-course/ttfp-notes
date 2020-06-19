@@ -1,2 +1,3 @@
 # ttfp-notes
-Notes of Type Theory and Formal Proof : An Introduction
+
+*Type Theory and Formal Proof: An Introduction* 一书的笔记。
