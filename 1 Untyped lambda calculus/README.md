@@ -125,8 +125,10 @@ FV(L) 表示 λ-项 L 中的自由变量的集合，其定义为：
 
 ## 替换
 
-替换的定义如下：
+替换 λ-项中的自由变量，它的定义如下：
 1. $x[x:=N]\equiv N$
 2. 如果 $x \not \equiv{y}$，那么 $y[x:=N]\equiv y$
 3. $(PQ)[x:=N]\equiv (P[x:=N])(Q[x:=N])$
 4. 如果 $\lambda z. P^{y\rightarrow z}$ 是 $\lambda y.P$ 的一个 α-变体，且 $z \notin FV(N)$，则 $(\lambda y. P)[x:=N]\equiv \lambda z.(P^{y\rightarrow z}[x:=N])$
+
+> 重命名可被看作是一种特殊的替换，如 $M^{x\rightarrow u} =_\alpha M[x:=u]$，如果重命名的条件满足的话。
