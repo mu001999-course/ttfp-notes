@@ -130,5 +130,3 @@ FV(L) 表示 λ-项 L 中的自由变量的集合，其定义为：
 2. 如果 $x \not \equiv{y}$，那么 $y[x:=N]\equiv y$
 3. $(PQ)[x:=N]\equiv (P[x:=N])(Q[x:=N])$
 4. 如果 $\lambda z. P^{y\rightarrow z}$ 是 $\lambda y.P$ 的一个 α-变体，且 $z \notin FV(N)$，则 $(\lambda y. P)[x:=N]\equiv \lambda z.(P^{y\rightarrow z}[x:=N])$
-
-
