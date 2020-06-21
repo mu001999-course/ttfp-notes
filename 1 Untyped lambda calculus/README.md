@@ -75,7 +75,7 @@ $\Lambda$ 以抽象语法的定义为：$\Lambda = V|(\Lambda\Lambda)|(\lambda V
 
 #### 真（proper）子项
 
-如果 ${L \in Sub(M)} \land {L \not \equiv{M}}$，那么 L 是 M 的真子项。
+如果 $\{L \in Sub(M)\} \land \{L \not \equiv\{M\}\}$，那么 L 是 M 的真子项。
 
 ### 省略括号
 
@@ -132,3 +132,107 @@ FV(L) 表示 λ-项 L 中的自由变量的集合，其定义为：
 4. 如果 $\lambda z. P^{y\rightarrow z}$ 是 $\lambda y.P$ 的一个 α-变体，且 $z \notin FV(N)$，则 $(\lambda y. P)[x:=N]\equiv \lambda z.(P^{y\rightarrow z}[x:=N])$
 
 > 重命名可被看作是一种特殊的替换，如 $M^{x\rightarrow u} =_\alpha M[x:=u]$，如果重命名的条件满足的话。
+
+> 替换的顺序会影响 λ-项，如 $x[x:=y][y:=x]\equiv x$，但是 $x[y:=x][x:=y]\equiv y$。
+
+> $M[x:=L]$ 不是一个合法的 λ-项，当替换执行完之后，所有的 $[x:=L]$ 都消失了以后所得到的才是 λ-项。
+
+### 引理
+
+令 $x \not \equiv{y} \land x \notin FV(L)$：
+
+$M[x:=N][y:=L]\equiv M[y:=L][x:=N[y:=L]]$
+
+## λ-项模 α 等价（module α-equivalence）
+
+α-等价在项构造时会被保留，引理：
+
+令 $M_1 =_\alpha N_1 \land M_2 =_\alpha N_2$，则：
+1. $M_1 N_1 =_\alpha M_2 N_2$
+2. $\lambda x. M_1 =_\alpha \lambda x. M_2$
+3. $M_1[x:=N_1]=_\alpha M_2[x:=N_2]$
+
+> 句法等同 $\equiv$ 现在包括 α-等价 $=_\alpha$。
+
+### Barendregt 约定
+
+约定 λ-项中的绑定变量的名字都不相同，并且与其中出现的所有自由变量也不相同。
+
+如使用 $(\lambda xy.xz)(\lambda uv.v)$，而非 $(\lambda xy.xz)(\lambda xz.z)$。
+
+## β-规约
+
+### 单步 β-规约（one-step β-reduction，$\rightarrow_\beta$）
+
+1. （基础，Basis）$(\lambda x.M)N \rightarrow_\beta M[x:=N]$
+2. （相容性，compatibility）如果 $M \rightarrow_\beta N$，那么 $ML \rightarrow_\beta NL$，$LM \rightarrow_\beta LN$ 以及 $\lambda x.M\rightarrow_\beta \lambda x.N$
+
+> 形如 $(\lambda x.M)N$ 的 λ-项记为 redex（可规约的表达式，reducible expression），而规约后的 $M[x:=N]$ 记为 contractum。
+
+### β-规约（零步或多步，$\twoheadrightarrow_\beta$）
+
+如果存在 $n\ge 0$，有若干项 $M_0, ..., M_n$，且 $M_0 \equiv M, M_n \equiv N$，以及对于 $0 \le i \lt n$，有 $M_i \rightarrow_\beta M_{i+1}$，则有 $M \twoheadrightarrow_\beta N$。
+
+> $\twoheadrightarrow_\beta$ 具有自反性以及传递性。
+
+### β-变换（β-conversion，β-equality，$=_\beta$）
+
+如果存在 $n\ge 0$，有若干项 $M_0, ..., M_n$，且 $M_0 \equiv M, M_n \equiv N$，以及对于 $0 \le i \lt n$，有 $M_i \rightarrow_\beta M_{i+1}$ 或 $M_{i+1} \rightarrow_\beta M_i$，则有 $M =_\beta N$。
+
+> 对于 $(\lambda y.yv)z \rightarrow_\beta zv \leftarrow_\beta (\lambda x.zv)v$ 而言，也有 $(\lambda y.yv)z =_\beta (\lambda x.zv)v$。
+
+> $=_\beta$ 具有自反性，对称性以及传递性。
+
+## 范式（normal forms）
+
+定义：
+1. 如果 M 不能进行 β-规约，则 M 是满足 β-范式（β-nf）的
+2. 如果存在 N 使得 $M =_\beta N$，则称 M 具有 β-范式 N，或称 M 是可 β-常化（β-normalising）的。
+
+> 记 M 的 β-范式为 M 的输出。
+
+### 引理
+
+当 M 满足 β-范式，那么 $M \twoheadrightarrow_\beta N$ 隐含 $M \equiv N$。
+
+### 规约路径（reduction path）
+
+1. （M 的有限规约路径）一个有限 λ-项序列 $N_0, N_1, N_2, ..., N_n$，且 $N_0 \euqiv M$ 以及对于 $0 \le i \lt n$ 有 $N_i \rightarrow_\beta N_{i+1}$
+2. （M 的无限规约路径）一个无限 λ-项序列 $N_0, N_1, N_2, ...$，且 $N_0 \equiv M$ 以及对于自然数 i 有 $N_i \rightarrow_\beta N_{i+1}$
+
+### Weak/strong normalisation
+
+1. 如果存在 β-范式 N，使得 $M \twoheadrightarrow_\beta N$，称 M 为 weakly normalising
+2. 如果不存在以 M 出发的无限规约路径，则称 M 为 strongly normalising
+
+> 所有的 strongly normalising 的项都是 weakly normalising 的。
+
+### Church-Rosser 定理
+
+> 缩写为 CR，或称回流（Confluence）定理
+
+假设对于给定的 λ-项 M，有 $M \twoheadrightarrow_\beta N_1$ 以及 $M \twoheadrightarrow_\beta N_2$，则存在一个 λ-项 $N_3$ 使得 $N_1 \twoheadrightarrow_\beta N_3$ 以及 $N_2 \twoheadrightarrow_\beta N_3$。
+
+> 通过 CR 定理可以得到一个结论，假设 $M =_\beta N$，则存在 L 使得 $M \twoheadrightarrow_\beta L$ 以及 $N \twoheadrightarrow_\beta L$。
+
+### 引理
+
+1. 如果 N 是 M 的 β-范式，那么 $M \twoheadrightarrow_\beta N$
+2. 一个 λ-项至多有一个 β-范式
+
+非正式表述如下：
+
+1. 如果一个 λ-项有一个输出，则这个输出可以向前（forward）计算到达
+2. 一个计算的输出若存在则唯一
+
+## 不动点（fixed point）定理
+
+对于任意 λ-项 L，都存在一个 λ-项 M，使得 $LM =_\beta M$，称之为不动点。
+
+定理：$\forall L \in \Lambda. \exist M \in \Lambda. LM =_\beta M$。
+
+在无类型的 λ-演算中，存在不动点组合子 Y，接收一个 λ-项，返回它的不动点：
+
+$Y\equiv \lambda y.(\lambda x.y(xx))(\lambda x.y(xx))$。
+
+对于任意的 λ-项 L，YL 都是 L 的一个不动点，因为 $L(YL) =_\beta YL$。
