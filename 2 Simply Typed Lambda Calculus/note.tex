@@ -1,0 +1,119 @@
+\documentclass[UTF8]{article}
+\usepackage{ctex}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\newtheorem{thm}{定义}[section]
+\newtheorem{notation}[thm]{记号}
+
+\title{简单类型化的$\lambda$-演算\\[2ex]\begin{large}读书笔记\end{large}}
+\author{许博}
+\date{}
+
+\begin{document}
+\maketitle
+	\section{引入类型}
+		第一章中介绍的无类型$\lambda$-演算的定义十分简洁而且优雅，但是有些时候过于自由，比如它允许$(xx)$这样没有意义的$\lambda$-项。为了更好地掌握函数的期望行为，本章将引入类型。
+		
+		函数通常被认为作用于某一集合的对象上，比如自然数的集合或者一条线上点的集合。
+		
+		类型的添加提供了在允许的输入值上的一些限制，比如定义在自然数域上的函数只能接受自然数作为输入值，即使对于非法的输入值的可能的输出值是清楚的。比如定义在自然数域上的立方函数，不能计算 3.5 的立方值，只能定义另一个作用于更大的域，比如实数域的立方函数。
+		
+		本章中引入的简单类型形式化了第一个重要的步骤，尽管某些时候限制性过强：我们不能通过简单类型来表示足够多的函数。后续章节将会增加更多的类型来加强系统的表达能力。
+		
+	\section{简单类型}
+		添加（抽象）类型的一个直接的方式是从一个类型变量的无限集合出发，然后添加乘法规则来构建更复杂的类型，即函数类型。
+		
+		记类型变量的无限集合：$\mathbb{V} = \{\alpha, \beta, \gamma, ...\}$。
+		
+		\begin{thm} 所有简单类型的集合$\mathbb{T}$
+			
+			(1)（类型变量）如果$\alpha \in \mathbb{V}$，则 $\alpha \in \mathbb{V}$。
+			
+			(2)（箭头类型）如果$\sigma,\tau\in\mathbb{T}$，则$(\sigma\rightarrow\tau)\in\mathbb{T}$。
+			
+		\end{thm}
+	
+		抽象语法描述为：$\mathbb{T}=\mathbb{V}|\mathbb{T}\rightarrow\mathbb{T}$。
+		
+		\begin{notation} 
+			(1) 希腊字母$\alpha,\beta,...$以及它们的变体用于表示$\mathbb{V}$中的类型变量。
+			
+			(2) 使用 $\sigma,\tau,...$（偶尔使用$A,B,...$）来表示任意的简单类型。
+			
+			(3) 最外层的括号会被省略。
+			
+			(4) 箭头类型中的括号是右结合的。
+		\end{notation}
+	
+		$\alpha_1 \rightarrow \alpha_2 \rightarrow \alpha_3 \rightarrow \alpha_4$ 是 $(\alpha_1 \rightarrow (\alpha_2 \rightarrow (\alpha_3 \rightarrow \alpha_4)))$ 的简写。
+		
+		使用形如 $M:\sigma$ 的格式表示项 M 具有类型 $\sigma$。
+		
+		假设对于每个类型$\sigma$，都有无限的变量可以获得，而每一个变量都只有一个唯一的类型：如果$x:\sigma \land x:\tau$，则$\sigma \equiv \tau$。
+		
+		类型化应用和抽象所需要的必要条件如下：
+		
+		(1)（应用）：如果 $M:\sigma\rightarrow\tau\land N:\sigma$，则$MN:\tau$。
+		
+		(2)（抽象）：如果$x:\sigma\land M:\tau$，则$\lambda x.M:\sigma\rightarrow\tau$。
+		
+		\begin{thm}
+			（可类型化的项，typable term）如果存在类型$\sigma$使得$M:\sigma$，则项 M 称为可类型化的（typable）。
+		\end{thm}
+
+	\section{邱奇-类型化（Church-typing）和柯里-类型化（Curry-typing）}
+		类型化一个$\lambda$-项从类型化它的变量开始，有两种方式给出变量的类型：
+		
+		(1) 在每一个变量的声明中，显式的指定类型。这种方式叫做显式类型化。如果考虑到在确定应用的类型时的限制，更复杂的项的类型也可以直接确定（我猜这里的意思是假设所有的应用中左右项的类型都是满足限制的）。
+		
+		(2) 另一种方式不给出变量的类型，在一定范围内隐式的确定变量的类型。这种方式叫做隐式类型化，通过一个查找过程来推断类型，其中可能包含了猜测。
+		
+		为了清楚的表示，约束变量的类型会在$\lambda$后引入它们（对应的绑定变量）时直接标记，自由变量的类型则会在所谓的上下文（context）中给出，顺序随意。
+		
+		如 $x:\alpha,y:(\alpha\rightarrow\alpha)\rightarrow\beta\vdash(\lambda z:\beta.\lambda u:\gamma.z)(yx):\gamma\rightarrow\beta$，读作在上下文 $x:\alpha,y:(\alpha\rightarrow\alpha)\rightarrow\beta$ 中，项 $(\lambda z:\beta.\lambda u:\gamma.z)(yx):\gamma\rightarrow\beta$ 具有类型 $\gamma\rightarrow\beta$。分隔符 $\vdash$ 分割上下文和可类型化的项。
+		
+	\section{$\lambda{\rightarrow}$的推导规则}
+		现在$\lambda$-项具有类型信息，给出预先类型化的$\lambda$-项的新的定义，新的集合也被记为$\Lambda_\mathbb{T}$：
+		
+		\begin{thm}（预先类型化的$\lambda$-项，$\Lambda_\mathbb{T}$）
+			
+			$\Lambda_\mathbb{T} = V|(\Lambda_\mathbb{T}\Lambda_\mathbb{T})|(\lambda V:\mathbb{T}.\Lambda_\mathbb{T})$
+		\end{thm}
+		
+		为了表示形如$\lambda$-项 M 在上下文$\Gamma$中具有类型$\sigma'$，进行定义：
+		
+		\begin{thm}（语句，声明，上下文，判决）
+			
+			(1) 一个语句形如 $M:\sigma$，其中$M\in\Lambda_\mathbb{T} \land\sigma\in\mathbb{T}$。
+			
+			(2) 一个声明是一个变量作为主体的语句。
+			
+			(3) 一个上下文是具有不同主体的声明的列表。
+			
+			(4) 一个判决形如 $\Gamma\vdash M:\sigma$，其中$\Gamma$是一个上下文，$M:\sigma$是一个语句。
+		\end{thm}
+	
+		给出能够判断一个判决$\Gamma\vdash M$是否是可推导的，也即 M 在上下文$\Gamma$中具有类型$\sigma$的形式化规则。
+		
+		给出的规则形式是一个所谓的推导系统（derivation system）：每一个规则解释某种判决如何能够被形式化确定。三个推导规则中的每一个都是所谓的前提-结论格式，一些前提出现在水平线之上，结论在水平线下边：\\
+		
+			$\bf\dfrac{premiss\ 1\ \ premiss\ 2\ \ ...\ \ premiss\ n}{conclusion}$\\
+		
+		这个推导结构的含义是：在已知$\bf premiss\ 1,\ premiss\ 2,\ ...\ ,premiss\ n$的情况下。可以推出$\bf conclusion$。当前提的个数为 0 时，则只需要写结论即可，同时无需水平线。
+		
+		给出$\lambda{\rightarrow}$的三条推导规则，这三条规则为$\lambda{\rightarrow}$形式化了一个推导系统：
+		
+		\begin{thm} $\lambda{\rightarrow}$的推导规则
+			
+			（变量）如果$x:\sigma\in\Gamma$，则$\Gamma\vdash x:\sigma$\\
+			
+			（应用）$\dfrac{\Gamma\vdash M:\sigma\rightarrow\tau\ \ \Gamma\vdash N:\sigma}{\Gamma\vdash MN:\tau}$\\
+			
+			（抽象）$\dfrac{\Gamma,x:\sigma\vdash M:\tau}{\Gamma\vdash\lambda x:\sigma.M:\sigma\rightarrow\tau}$\\
+			
+		\end{thm}
+	
+		
+
+\end{document}
