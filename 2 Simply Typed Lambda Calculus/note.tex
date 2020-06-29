@@ -5,6 +5,7 @@
 \usepackage{graphicx}
 \newtheorem{thm}{定义}[section]
 \newtheorem{notation}[thm]{记号}
+\newtheorem{lemma}[thm]{引理}
 
 \title{简单类型化的$\lambda$-演算\\[2ex]\begin{large}读书笔记\end{large}}
 \author{许博}
@@ -114,6 +115,93 @@
 			
 		\end{thm}
 	
+		\begin{thm} 合法的$\lambda{\rightarrow}$-项
+			
+			如果存在上下文$\Gamma$以及类型$\rho$使得$\Gamma\vdash M:\rho$，则在$\lambda{\rightarrow}$中的预先类型化的项 M 称为合法的。
+		\end{thm}
+	
+	\section{$\lambda{\rightarrow}$中推导的不同格式}
+		树型，线型以及旗型（一种特殊的线型，更加精简）。
 		
+	\section{类型理论中需要解决的问题的种类}
+		三种：
+		
+		(1) Well-typedness，也叫 Typability。我的理解是良好的类型定义，类型定义的信息是足够的：
+		
+		$?\vdash term : ?$.
+		
+		如果一个项是合法的，能够找到一个合适的上下文和项的类型，如果不是合法的，也能展示出为什么是错误的。
+		
+		(1a) (1) 的一个变体也即 $Type Assignment$，类型赋值，在给出上下文的时候，找到项的类型：
+		
+		$context \vdash term: ?$.
+		
+		(2) 类型检查：
+		
+		$context\vdash^? term:type$，在给定上下文，项以及它的类型时，检查在给定的上下文时，给定的项是否具有给定的类型。
+		
+		(3) 项的查找：
+		
+		$context\vdash ? : type$.
+		
+		给定上下文和项的类型，找到是否存在一个项在给定的上下文中具有给定的类型。
+
+	\section{项的查找}
+		PAT-解释，PAT 意为 propositions-as-types 以及 proofs-as-terms，查找在上下文中符合给定类型的$\lambda{\rightarrow}$-项，整个过程可以解释为等价的逻辑证明。
+		
+	\section{$\lambda{\rightarrow}$的一些性质}
+		首先是一些定义：
+		
+		\begin{thm} （域，dom，子上下文，$\subseteq$，排列，投影，$\upharpoonright$）
+			
+			(1) 如果 $\Gamma\equiv x_1:\sigma_1,...,x_n:\sigma_n$，则$\Gamma$的域或$dom(\Gamma)$是列表$(x_1,...,x_n)$。
+			
+			(2) 如果所有出现在$\Gamma'$的声明以同样的顺序出现在$\Gamma$中，则上下文$\Gamma'$是$\Gamma$的一个子上下文，或$\Gamma'\subseteq\Gamma$。
+			
+			(3) 如果所有出现在$\Gamma'$的声明出现在$\Gamma$中，如果所有出现在$\Gamma$的声明也出现在$\Gamma'$中，则$\Gamma'$是$\Gamma$的一个排列（permutation），反之亦然。
+			
+			(4) 如果 $\Gamma$ 是一个上下文，且 $\Phi$ 是变量的一个集合，则$\Gamma$在$\Phi$上的投影，或记为$\Gamma\upharpoonright\Phi$，是$\Gamma$的子上下文，记为$\Gamma'$，满足条件$dom(\Gamma') = dom(\Gamma)\cap\Phi$。
+		\end{thm}
+	
+		性质：
+		
+		\begin{lemma} （自由变量引理）
+			
+			如果 $\Gamma\vdash L:\sigma$，则 $FV(L)\subseteq dom(\Gamma)$。
+		\end{lemma}
+	
+		\begin{lemma} （Thinning，Condensing，Permutation）
+			
+			(1) (稀疏引理，Thinning)令上下文$\Gamma'$和$\Gamma''$满足条件$\Gamma'\subseteq\Gamma''$，如果$\Gamma'\vdash M:\sigma$，也有$\Gamma''\vdash M:\sigma$。
+			
+			(2) (压缩引理，Condensing)如果$\Gamma\vdash M$，也有$\Gamma\upharpoonright FV(M) \vdash M:\sigma$。
+			
+			(3) (排列引理，Permutation)如果$\Gamma\vdash M:\sigma$且$\Gamma'$是$\Gamma$的一个排列，则$\Gamma'$也是一个上下文且$\Gamma'\vdash M:\sigma$。
+		\end{lemma}
+	
+		\begin{lemma} （生成引理，Generation Lemma）
+			
+			(1) 如果 $\Gamma\vdash x:\sigma$，则 $x:\sigma \in\Gamma$。
+			
+			(2) 如果 $\Gamma\vdash M N:\tau$，则存在类型$\sigma$使得$\Gamma\vdash M:\sigma \rightarrow \tau$且$\Gamma\vdash N:\sigma$。
+			
+			(3) 如果 $\Gamma\vdash\lambda x:\sigma.M:\rho$，则存在$\tau$使得$\Gamma,x:\sigma\vdash M:\tau$且$\rho\equiv\sigma\rightarrow\tau$。
+		\end{lemma}
+	
+		生成引理从构造的角度解释 judgement 是如何产生的。可以看作是推导规则的逆过程。
+		
+		\begin{lemma} （子项引理）如果 M 是合法的，则 M 的每一个子项都是合法的。
+		\end{lemma}
+	
+		\begin{lemma} （唯一性引理）假设$\Gamma\vdash M:\sigma$ 且 $\Gamma\vdash M:\tau$，则$\sigma\equiv\tau$。
+		\end{lemma}
+		
+		唯一性引理也即在给定的上下文中，任意给定的项都只有唯一的类型。
+		
+	\section{规约和$\lambda{\rightarrow}$}
+		\begin{lemma} （替换引理）假设$\Gamma',x:\sigma,\Gamma''\vdash M:\tau$且$\Gamma'\vdash N:\sigma$，则$\Gamma',\Gamma''\vdash M\left[x:=N\right]:\tau$。
+		\end{lemma}
+	
+		再替换时，x 被替换为同类型的项，而 M 的类型不发生改变。
 
 \end{document}
