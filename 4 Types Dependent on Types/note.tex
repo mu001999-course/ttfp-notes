@@ -14,4 +14,10 @@
 \begin{document}
 \maketitle
 	\section{类型构造子}
+		上一章中引入了一般性的（generalised）项，通过从类型变量抽象项。比如作用于确定类型$\sigma$的恒等函数$\lambda x:\sigma.x$可以被泛化成项$\lambda\alpha:*.\lambda x:\alpha.x$，多态的（polymorphic）恒等函数，抽象于$\alpha$。
+		
+		自然而然的，我们也希望可以通过类似的方式构造一般性的类型。比如形如$\beta\rightarrow\beta,\gamma\rightarrow\gamma,...$，等具有结构$\lozenge\rightarrow\lozenge$的类型，其中箭头的左边和右边是一样的类型。（我认为这里如果延续之前的符号使用方式，我认为$\beta$可能使用$\sigma$等替换更为合适，$\beta\rightarrow\beta$更像是抽象于$\beta$的类型，而非一个具体的类型，此时$\beta$甚至与$\lozenge$是没有区别的）。
+		
+		为了处理这种情况，我们引入一个包含了这种结构的本质（essence）的一般性的表达式：$\lambda\alpha:*.\alpha\rightarrow\alpha$。这个表达式本身并不是一个类型，而是将类型当作值的一个函数。称之为类型构造子（type constructor）。
+		
 \end{document}
