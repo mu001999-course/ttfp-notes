@@ -13,18 +13,60 @@
 
 \begin{document}
 \maketitle
+		本章将介绍另一个扩充$\lambda{\rightarrow}$的系统$\lambda{\underline{\omega}}$，而非在$\lambda{2}$上继续扩充的系统。
+
 	\section{类型构造子}
 		上一章中引入了一般性的（generalised）项，通过从类型变量抽象项。比如作用于确定类型$\sigma$的恒等函数$\lambda x:\sigma.x$可以被泛化成项$\lambda\alpha:*.\lambda x:\alpha.x$，多态的（polymorphic）恒等函数，抽象于$\alpha$。
 		
-		自然而然的，我们也希望可以通过类似的方式构造一般性的类型。比如形如$\beta\rightarrow\beta,\gamma\rightarrow\gamma,...$，等具有结构$\lozenge\rightarrow\lozenge$的类型，其中箭头的左边和右边是一样的类型。（我认为这里如果延续之前的符号使用方式，我认为$\beta$可能使用$\sigma$等替换更为合适，$\beta\rightarrow\beta$更像是抽象于$\beta$的类型，而非一个具体的类型，此时$\beta$甚至与$\lozenge$是没有区别的）。
+		通过类似的方式也可以构造一般性的类型。比如形如$\beta\rightarrow\beta,\gamma\rightarrow\gamma,...$，等具有结构$\lozenge\rightarrow\lozenge$的类型，其中箭头的左边和右边是一样的类型。（我认为这里如果延续之前的符号使用方式，我认为$\beta$可能使用$\sigma$等替换更为合适，$\beta\rightarrow\beta$更像是抽象于$\beta$的类型，而非一个具体的类型，此时$\beta$甚至与$\lozenge$是没有区别的）。
 		
-		为了处理这种情况，我们引入一个包含了这种结构的本质（essence）的一般性的表达式：$\lambda\alpha:*.\alpha\rightarrow\alpha$。这个表达式本身并不是一个类型，而是将类型当作值的一个函数。称之为类型构造子（type constructor）。只有当喂给它类型（比如$\beta$，$\gamma$）时我们可以得到类型：
+		为了处理这种情况，引入一个包含了这种结构的本质（essence）的一般性的表达式：$\lambda\alpha:*.\alpha\rightarrow\alpha$。这个表达式本身并不是一个类型，而是将类型当作值的一个函数。称之为类型构造子（type constructor）。只有当喂给它类型（比如$\beta$，$\gamma$）时我们可以得到类型：
 		
 		$(\lambda\alpha:*.\alpha\rightarrow\alpha)\beta\rightarrow_\beta\beta\rightarrow\beta$，
 		$(\lambda\alpha:*.\alpha\rightarrow\alpha)\gamma\rightarrow_\beta\gamma\rightarrow\gamma$。
 		
 		我们由类型$\alpha$抽象出类型$\alpha\rightarrow\alpha$，来获得类型构造子$\lambda\alpha:*.\alpha\rightarrow\alpha$。类似的，还可以构造出更复杂的类型构造子，比如$\lambda\alpha:*.\lambda\beta:*.\alpha\rightarrow\beta$。
 		
-		而一个显然的问题是：类型构造子的类型是什么？
+		而一个显然的问题是：类型构造子的类型是什么？我们可以将$\lambda\alpha:*.\alpha\rightarrow\alpha$看作是一个将类型$\alpha$映射到类型$\alpha\rightarrow\alpha$的函数，因为$\alpha:*$且$\alpha\rightarrow\alpha:*$，我们可以得到：$\lambda\alpha:*.\alpha\rightarrow\alpha:*\rightarrow*$。
 		
+		因此在*之后，需要一个新的“超级类型（super-type）”，即$*\rightarrow*$。
+		
+		类似的，我们可以得到：$\lambda\alpha:*.\lambda\beta:*.\alpha\rightarrow\beta:*\rightarrow(*\rightarrow*)$。
+		
+		需要注意的是，在上一章中，提到了*是所有（$\mathbb{T}2$）类型的类型，而$*,*\rightarrow*,...$等类型不属于$\mathbb{T}2$，因此它们的类型也不是*。以及在$\lambda\alpha:*.\alpha\rightarrow\alpha$中，$\alpha\rightarrow\alpha$的类型是*而不是$*\rightarrow*$，是因为$\alpha\rightarrow\alpha$是一个接收类型为$\alpha$的输入值，返回类型为$\alpha$的输出值的函数的类型，而$*\rightarrow*$是一个接收类型，返回类型的函数的类型。
+		
+		上述扩展称作依赖于类型的类型（types depending on types），扩展后的系统记为$\lambda{\underline{\omega}}$。
+			
+		所有的超级类型，单独的*以及箭头分割的若干*符号，称为类（kind），所有类的集合$\mathbb{K}$的抽象定义为：
+		
+		$\mathbb{K}=*|(\mathbb{K}\rightarrow\mathbb{K})$。
+		
+		而所有类的类型我们使用符号$\square$表示，有且仅有一个的超级超级类型（super-super-type）。也即有$*:\square,*\rightarrow:\square,...$。
+		
+		如果$\kappa$是一个类，则对于每个类型是$\kappa$的$M$（也即$M:\kappa$），$M$被称作是一个类型构造子，简称为构造子。而之前的类型，比如$\alpha$或者$\alpha\rightarrow\alpha$也都是构造子，尽管它们什么也没有构造。
+		
+		我们使用术语（term）真构造子（proper constructor）表示不是类型的构造子（即类型不是*的构造子）。因此构造子的集合被分为了（旧的）类型和真构造子。
+		
+		最后，使用类别（sort）或符号$s$表示*或$\square$：
+		
+		\begin{thm}（构造子，真构造子，类别）
+			
+			(1) 如果$\kappa:\square$且$M:\kappa$，则$M$是一个构造子，如果$\kappa\not\equiv*$，则$M$是一个真构造子。
+			
+			(2) 类别（$s$）的集合为$\{*,\square\}$。
+		\end{thm}
+	
+		随着$\square$的引入，我们的语法中有四个层级（level）：
+		
+		\begin{thm}（层级，level）
+			
+			第1层：项（terms）；
+			
+			第2层：构造子（包括类型和真构造子）；
+			
+			第3层：类（kinds）；
+			
+			第4层：超级超级类型$\square$。
+		\end{thm}
+			
 \end{document}
