@@ -47,7 +47,7 @@
 		
 		$\lambda\alpha:*.\lambda x:\alpha.x$。
 		
-		新加入的抽象是出现在第一个$\lambda$之后的类型变量$\alpha$，而符号*表示所有（简单）类型的类型，换而言之，如果$\alpha$是一个类型，那么$\alpha\in *$。需要注意的是，$\lambda\alpha:*.\lambda x:\alpha.x$是一个依赖于类型的项（a  term depending on a type），它所依赖的类型是$\alpha$。
+		新加入的抽象是出现在第一个$\lambda$之后的类型变量$\alpha$，而符号*表示所有（$\mathbb{T}2$）类型的类型，换而言之，如果$\alpha$是一个（$\mathbb{T}2$）类型，那么$\alpha\in *$。需要注意的是，$\lambda\alpha:*.\lambda x:\alpha.x$是一个依赖于类型的项（a  term depending on a type），它所依赖的类型是$\alpha$。
 		
 		得到的这个（二阶）项称为多态的（polymorphic）恒等函数，需要注意的是它自己并非一个恒等函数，而是一个潜在的（potential）恒等函数。在进行（二阶）应用以及$\beta$-规约后可以得到一个名副其实（genuine）的恒等函数，如：
 		
