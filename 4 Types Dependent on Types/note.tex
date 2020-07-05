@@ -20,7 +20,7 @@
 		\noindent
 		上一章中引入了一般性的（generalised）项，通过从类型变量抽象项。比如作用于确定类型$\sigma$的恒等函数$\lambda x:\sigma.x$可以被泛化成项$\lambda\alpha:*.\lambda x:\alpha.x$，多态的（polymorphic）恒等函数，抽象于$\alpha$。
 		
-		通过类似的方式也可以构造一般性的类型。比如形如$\beta\rightarrow\beta,\gamma\rightarrow\gamma,...$，等具有结构$\lozenge\rightarrow\lozenge$的类型，其中箭头的左边和右边是一样的类型。（我认为这里如果延续之前的符号使用方式，我认为$\beta$可能使用$\sigma$等替换更为合适，$\beta\rightarrow\beta$更像是抽象于$\beta$的类型，而非一个具体的类型，此时$\beta$甚至与$\lozenge$是没有区别的）。
+		通过类似的方式也可以构造一般性的类型。比如形如$\beta\rightarrow\beta,\gamma\rightarrow\gamma,...$，等具有结构$\lozenge\rightarrow\lozenge$的类型，其中箭头的左边和右边是一样的类型。
 		
 		为了处理这种情况，引入一个包含了这种结构的本质（essence）的一般性的表达式：$\lambda\alpha:*.\alpha\rightarrow\alpha$。这个表达式本身并不是一个类型，而是将类型当作值的一个函数。称之为类型构造子（type constructor）。只有当喂给它类型（比如$\beta$，$\gamma$）时我们可以得到类型：
 		
@@ -91,5 +91,9 @@
 			
 			(类别，sort)$\emptyset \vdash *:\square$
 		\end{thm}
+	
+		为了确定给定的上下文中所有的声明都是可推导的，在$\lambda{2}$和$\lambda{\underline{\omega}}$中使用变量规则（(var)-rule）推导。但是在$\lambda{\underline{\omega}}$中，我们用有一点不同的方式：巧妙地将上下文声明的可推导性与构造合适的上下文相结合。
+		
+		原因是$\lambda{\underline{\omega}}$中的类型更为复杂，所以必须保证类型的定义是良构的（well-formed）。在$\lambda{\rightarrow}$中，合法类型的集合已经预先给出，所以没有问题，而在$\lambda{2}$中，必须确定一个（合适的）$\lambda{2}$-上下文，这个上下文也提供了在其中使用到的类型需要的条件（requirements），见定义3.4.4(3)，$\rho$中出现的所有自由类型变量需要在上下文中声明，此时才可以判断$\rho$的良构与否。因此，与$\lambda{\rightarrow}$不同，$\lambda{2}$中出现在一个判断（judgement）中的类型的合法性不再能通过引用外部的集合来判定，但是应该依赖于包括其上下文的自身判断的一个检查。
 			
 \end{document}
