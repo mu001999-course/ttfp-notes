@@ -13,9 +13,11 @@
 
 \begin{document}
 \maketitle
+		\noindent
 		本章将介绍另一个扩充$\lambda{\rightarrow}$的系统$\lambda{\underline{\omega}}$，而非在$\lambda{2}$上继续扩充的系统。
 
 	\section{类型构造子}
+		\noindent
 		上一章中引入了一般性的（generalised）项，通过从类型变量抽象项。比如作用于确定类型$\sigma$的恒等函数$\lambda x:\sigma.x$可以被泛化成项$\lambda\alpha:*.\lambda x:\alpha.x$，多态的（polymorphic）恒等函数，抽象于$\alpha$。
 		
 		通过类似的方式也可以构造一般性的类型。比如形如$\beta\rightarrow\beta,\gamma\rightarrow\gamma,...$，等具有结构$\lozenge\rightarrow\lozenge$的类型，其中箭头的左边和右边是一样的类型。（我认为这里如果延续之前的符号使用方式，我认为$\beta$可能使用$\sigma$等替换更为合适，$\beta\rightarrow\beta$更像是抽象于$\beta$的类型，而非一个具体的类型，此时$\beta$甚至与$\lozenge$是没有区别的）。
@@ -69,6 +71,25 @@
 			第4层：超级超级类型$\square$。
 		\end{thm}
 	
-		对于语句$A:B$，可以得出$B$的层级一定比$A$高一级，比如当$A$是一个项时，$B$是一个类型。
+		对于语句$A:B$，可以得出$B$所处的层级一定比$A$高一级，比如当$A$是一个项时，$B$是一个类型，或者$A$是一个类型时，$B\equiv*$。
+		
+	\section{$\lambda{\underline{\omega}}$中的类别规则和变量规则，sort-rule and var-rule in $\lambda{\underline{\omega}}$}
+		\noindent
+		本章中描述的系统叫做$\lambda{\underline{\omega}}$，它是$\lambda{\rightarrow}$的另一个扩展：
+		
+		\noindent
+		- $\lambda{2} = \lambda{\rightarrow}$ 加\ 依赖于类型的项，
+		
+		\noindent
+		- $\lambda{\underline{\omega}} = \lambda{\rightarrow}$ 加\ 依赖于类型的类型。
+		
+		给出$\lambda{\underline{\omega}}$的具体推导规则。
+		
+		首先形式化$*$的类型是$\square$，这个规则称为类别规则（sort-rule）：
+		
+		\begin{thm} （类别规则，sort-rule）
+			
+			(类别，sort)$\emptyset \vdash *:\square$
+		\end{thm}
 			
 \end{document}
