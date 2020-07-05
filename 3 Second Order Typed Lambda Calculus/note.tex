@@ -57,18 +57,6 @@
 		\noindent
 		- $(\lambda\alpha:*.\lambda x:\alpha.x)(nat\rightarrow bool)\rightarrow_\beta\lambda x:(nat\rightarrow bool).x$，得到一个在$nat\rightarrow bool$上的恒等函数。
 		
-		回顾类型变量的无限集合：$\mathbb{V} = \{\alpha, \beta, \gamma, ...\}$。
-		
-		\begin{thm} 所有简单类型的集合$\mathbb{T}$
-			
-			(1)（类型变量）如果$\alpha \in \mathbb{V}$，则 $\alpha \in \mathbb{V}$。
-			
-			(2)（箭头类型）如果$\sigma,\tau\in\mathbb{T}$，则$(\sigma\rightarrow\tau)\in\mathbb{T}$。
-			
-		\end{thm}
-	
-		上一个例子中，$\alpha$不能以$\sigma$替换，因为$\sigma$表示一个尽管未知但具体唯一确定的类型，作为某一具体类型的符号表示，而$\alpha$是一个类型变量，可被未知的任意类型替换，但在替换之前，其本身是一个类型变量，而非一个具体的类型。
-		
 		因此当以这种方式扩展$\lambda{\rightarrow}$时，需要引入二阶抽象和应用，除此之外还需要对于二阶项的$\beta$-规约。
 		
 		第二个是关于迭代（iteration）的例子，也即一个函数的重复应用。对于一个类型$\sigma$和一个具有类型$\sigma\rightarrow\sigma$的函数$F$，定义$D_{\sigma,F}$为映射类型$\sigma$的$x$到$F(F(x))$的函数。$D_{\sigma,F}$是$F$的二次迭代（second iteration），也可记为$F\circ F$（F和自己的复合函数）。
@@ -106,7 +94,7 @@
 		
 		$\mathbb{T}2 = \mathbb{V}|(\mathbb{T}2\rightarrow\mathbb{T}2)|(\Pi\mathbb{V}:*.\mathbb{T}2)$。
 		
-		第二部，扩展预先类型化的$\lambda$-项的集合（$\Lambda_{\mathbb{T}}$）以允许二阶抽象和应用：
+		第二步，扩展预先类型化的$\lambda$-项的集合（$\Lambda_{\mathbb{T}}$）以允许二阶抽象和应用：
 		
 		\begin{thm}（二阶预先类型化的$\lambda$-项，$\lambda{2}$-项，$\Lambda_{\mathbb{T}2}$）
 			
@@ -122,7 +110,7 @@
 			(2) 一个声明是由一个项变量或一个类型变量作为对象的语句。
 		\end{thm}
 		
-		因为$\lambda{\rightarrow}$中的类型常量在$\lambda{2}$中变成了类型变量，所以与$\lambda{\rightarrow}$相比，$\lambda{2}$更加严格一些，因为所有的变量使用前必须被声明，在使用变量之前，我们知道所有变量的类型。
+		因为$\lambda{\rightarrow}$中的类型常量在$\lambda{2}$中变成了类型变量，所以与$\lambda{\rightarrow}$相比，$\lambda{2}$更加严格一些，因为所有的变量使用前必须被声明，在使用变量之前，我们需要知道所有变量的类型。所以所有的抽象的类型变量也需要被声明，这也是抽象的类型变量与前一章中的类型变量不同的地方，文中假设出现的类型变量都是抽象的，而非代表某一具体类型的类型变量。
 		
 		\begin{thm}（$\lambda{2}$-上下文；域；dom）
 			
