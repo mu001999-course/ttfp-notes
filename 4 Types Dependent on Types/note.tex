@@ -96,9 +96,9 @@
 	
 		为了确定给定的上下文中所有的声明都是可推导的，在$\lambda{2}$和$\lambda{\underline{\omega}}$中使用变量规则（(var)-rule）推导。但是在$\lambda{\underline{\omega}}$中，我们用有一点不同的方式：巧妙地将上下文声明的可推导性与构造合适的上下文相结合。
 		
-		原因是$\lambda{\underline{\omega}}$中的类型更为复杂，所以必须保证类型的定义是良构的（well-formed）。在$\lambda{\rightarrow}$中，合法类型的集合已经预先给出，所以没有问题，而在$\lambda{2}$中，必须确定一个（合适的）$\lambda{2}$-上下文，这个上下文也提供了在其中使用到的类型需要的条件（requirements），见定义3.4.4(3)，$\rho$中出现的所有自由类型变量需要在上下文中声明，此时才可以判断$\rho$的良构与否。因此，与$\lambda{\rightarrow}$不同，$\lambda{2}$中出现在一个判断（judgement）中的类型的合法性不再能通过引用外部的集合来判定，但是应该依赖于包括其上下文的自身判断的一个检查。
+		原因是$\lambda{\underline{\omega}}$中的类型更为复杂，所以必须保证类型的定义是良构的（well-formed）。在$\lambda{\rightarrow}$中，合法类型的集合已经预先给出，所以没有问题，而在$\lambda{2}$中，必须确定一个（合适的）$\lambda{2}$-上下文，这个上下文也提供了在其中使用到的类型需要的条件（requirements），见定义3.4.4(3)，$\rho$中出现的所有自由类型变量需要在上下文中声明，此时才可以推定$\rho$的良构与否。因此，与$\lambda{\rightarrow}$不同，$\lambda{2}$中出现在一个推定（judgement）中的类型的合法性不再能通过引用外部的集合来判定，但是应该依赖于包括其上下文的自身推定的一个检查。
 		
-		在现在的系统中，类型需要的条件更加严格：出现在一个判断中的类型的合法性只取决于（follow）我们是否可以形式化地推导出它。
+		在现在的系统中，类型需要的条件更加严格：出现在一个推定中的类型的合法性只取决于（follow）我们是否可以形式化地推导出它。
 		
 		这个方式是：如果类型$A$已经是合法的，我们只用一个声明$x:A$扩展一个上下文。并且一个语句中的合法类型位于第2层或第3层，也即是一个类型（因为构造子不是类型，不能出现在$:$的右边）或是一个类。可以通过一个规则来表示：
 		
@@ -106,6 +106,96 @@
 			
 			(变量，var) 如果$x\not\in\Gamma$，则$\dfrac{\Gamma\vdash A:s}{\Gamma,x:A\vdash x:A}$。
 		\end{thm}
-		
+
 		需要注意的是，在这条规则中可以看到，$x$的类型不能是$\square$，是因为目前为止，该系统不允许应用时右边是$\square$类型的类（kind），因此也不存在类型是$\square$的绑定变量。
+
+		$s$表示$*$或$\square$，因此$A$是一个类型或一个类（kind），$x$因此也表示一个项变量或是一个类型变量。这个规则允许我们以一个声明$x:A$扩展上下文$\Gamma$，并且在扩展的上下文中推导出与声明一样的语句。
+
+		$x\not\in\Gamma$保证了变量$x$未在$\Gamma$中出现，因此声明在一个上下文中的所有的变量都是不同的，避免了变量名相同（类型不同）时造成的混淆。
+
+		使用(sort)和(var)规则的一个例子，观察它们如何工作：\\
+
+		$\cfrac{\cfrac{(1)\ \emptyset\vdash*:\square}{(2)\ \alpha:*\vdash\alpha:*}\ (var)}{(3)\ \alpha:*,x:\alpha\vdash x:\alpha}\ (var)$\\
+		
+		第(1)行由(sort)规则推导而出，(1)-(2)以及(2)-(3)都应用了(var)规则。同时可以清楚地发现，新的(var)规则没有$\lambda{\rightarrow}$中的(var)规则通用，因为当前的(var)规则只允许推导出上下文中新添加的最后的声明$x:A$，而$\lambda{\rightarrow}$中，任意出现在$\Gamma$的声明$x:\sigma$都是可推导的。
+		
+		如在$\lambda\rightarrow$中一样，我们也希望在$\lambda{\underline{\omega}}$中可以推导$\alpha:*,x:\alpha\vdash\alpha:*$，$\alpha:*,\beta:*\vdash\alpha:*$以及$\alpha:*,\beta:*\vdash\beta:*$。但目前尚不可行，因为缺少(var)规则需要的$\bf premiss$，需要注意的是，尽管$\alpha:*,\beta:*\vdash\beta:*$中$\beta:*$是上下文中最后一个声明，但我们不能得到$\bf premiss$：
+		
+		$\alpha:*\vdash*:\square$。
+		
+		因为前边所提到的(sort)规则，只给出了空上下文时的规则。
+		
+		为了解决这个问题，引入了所谓的弱化规则（weakening rule）。
+		
+	\section{$\lambda{\underline{\omega}}$中的弱化规则(weakening rule)}
+		弱化规则允许我们通过添加新的声明来弱化一个推定（judgement）的上下文。
+		
+		\begin{thm}（弱化规则，weakening rule）
+			
+			(weak) 如果$x\not\in\Gamma$，则$\dfrac{\Gamma\vdash A:B\ \ \ \Gamma\vdash C:s}{\Gamma,x:C\vdash A:B}$。
+		\end{thm}
+		
+		若上下文$\Gamma$已经可以推导出$A:B$，在$\Gamma$的尾部添加了一个任意的声明（弱化）后仍然可以推导出$A:B$。
+		
+		需要注意的是第二个$\bf premiss$，添加的声明的类型需要是可推导出的类型或类（kind），与(var)规则类似。
+		
+		在添加了弱化规则以后，前边所提到的稀疏引理（Thinning Lemma）在$\lambda{\underline{\omega}}$中依然成立，即子上下文可以推定出来的语句在扩展后的上下文中依然可以推定，尽管弱化规则只允许在尾部添加声明。
+		
+		现在便可以推导$\alpha:*,x:\alpha\vdash\alpha:*$，推导树：\\
+		
+		$\cfrac{\cfrac{(1)\ \emptyset\vdash*:\square}{(2)\ \alpha:*\vdash\alpha:*}\ (var)\ \ \ \cfrac{(1)\ \emptyset\vdash*:\square}{(2)\ \alpha:*\vdash\alpha:*}\ (var)}{(3)\ \alpha:*,x:\alpha\vdash\alpha:*}\ (weak)$
+		
+	\section{$\lambda{\underline{\omega}}$中的形成规则（formation rule）}
+		在$\lambda{2}$中，有一个叫做(form)的形成规则，用于在一个上下文中类型化语句的构造，这个规则基于$\lambda{2}$-类型的集合$\mathbb{T}2$，正如之前提到的，$\lambda{\underline{\omega}}$中的类型更为复杂，因此，引入了一个“真正”的推导规则，包含$\bf premisses$和$\bf conclusion$，用于类型（以及类(kind)）的构造：
+		
+		\begin{thm}（形成规则，formation rule）\\
+			
+			(form)\ $\dfrac{\Gamma\vdash A:s\ \ \ \Gamma\vdash B:s}{\Gamma\vdash A\rightarrow B:s}$
+		\end{thm}
+		
+		需要注意的是，规则中出现的三个$s$是相同的，同时表示*或$\square$。
+		
+		在引入新的(form)规则之前，由(var)规则与(weak)规则只能推导出$*:\square,\alpha:*,x:\alpha$而不能推出箭头类型$*\rightarrow*:\square$以及$\alpha\rightarrow\beta:*$等。引入新的形成规则可以覆盖我们需要的所有类型和类（kind）。\\
+		
+		例如：$\dfrac{\emptyset\vdash*:\square\ \ \ \emptyset\vdash*:\square}{\emptyset\vdash*\rightarrow*:\square}\ (form)$
+		
+	\section{$\lambda{\underline{\omega}}$中的应用与抽象规则}
+		$\lambda{\underline{\omega}}$中的这两个规则与之前略有不同，首先，用于类型的元变量（meta-variable）的名字不同，因为$\lambda{\underline{\omega}}$中的类型更为通用，其次，需要保证类型是良构的（即可以由上下文推导出）:
+		
+		\begin{thm}（应用规则）\\
+			
+			(appl) $\dfrac{\Gamma\vdash M:A\rightarrow B\ \ \ \Gamma\vdash N:A}{\Gamma\vdash MN:B}$
+		\end{thm}
+	
+		\begin{thm}（抽象规则）\\
+			
+			(abst) $\dfrac{\Gamma,x:A\vdash M:B\ \ \ \Gamma\vdash A\rightarrow B:s}{\Gamma\vdash\lambda x:A.M:A\rightarrow B}$
+		\end{thm}
+	
+		需要注意的是，因为$s\in\{*,\square\}$，所以这些规则（包括之前定义的）都同时具有两种作用，比如当$s\equiv*$时，$A\rightarrow B$是一个第二层的类型，如$(\alpha\rightarrow\beta)\rightarrow\gamma$，当$s\equiv\square$时，$A\rightarrow B$就是一个第三层的类型（或者说类,kind），如$(*\rightarrow*)\rightarrow*$。
+		
+	\section{简化（shortened）推导}
+		为了保证推导系统的严谨性以及完整性所定义的这些规则，导致在推导的过程中有许多很无趣以及显而易见的部分，比如在推导$\alpha:*,\beta:*\vdash\alpha\rightarrow\beta:*$时，需要下面这些推定：
+	
+		$\emptyset\vdash*:\square$ (sort),
+		
+		$\alpha:*\vdash\alpha:*$ (var),
+		
+		$\alpha:*\vdash*:\square$ (weak),
+		
+		$\alpha:*,\beta:*\vdash\alpha:*$ (weak),
+		
+		$\alpha:*,\beta:*\vdash\beta:*$ (var)。
+		
+		而上述推定包括$\alpha:*,\beta:*\vdash\alpha\rightarrow\beta:*$都是非常显而易见的。这里不是很有趣的步骤出现在（尤其是）下面三个情况下：
+		
+		(i) 当使用规则(sort),(var)和(weak)时，
+		
+		(ii) 当使用规则(form)时，以及
+		
+		(iii) 当确定(abst)规则的第二个$\bf premiss$的合法性时。
+		
+		为了将注意力放在真正有趣的步骤上，我们将允许跳过如上的所有推定，或者只确定某个类型的良构与否。因此$\alpha:*,\beta:*\vdash\alpha\rightarrow\beta:*$现在可以直接使用。
+		
+	\section{变换（conversion）规则}
 \end{document}
