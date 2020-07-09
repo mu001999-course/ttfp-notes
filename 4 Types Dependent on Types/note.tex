@@ -1,5 +1,6 @@
 \documentclass[UTF8]{article}
 \usepackage{ctex}
+\usepackage{ulem}
 \usepackage{amssymb}
 \usepackage{amsmath}
 \usepackage{graphicx}
@@ -14,14 +15,14 @@
 \begin{document}
 \maketitle
 		\noindent
-		本章将介绍另一个扩充$\lambda{\rightarrow}$的系统$\lambda{\underline{\omega}}$，而非在$\lambda{2}$上继续扩充的系统。
+		本章将介绍另一个扩充$\lambda{\rightarrow}$的系统$\lambda{\uline{\omega}}$，而非在$\lambda{2}$上继续扩充的系统。
 		
 	\section{疑问}
 		在4.7变换规则中：\\
 		
 		(conv) 如果$B=_\beta B'$，则$\dfrac{\Gamma\vdash A:B\ \ \ \Gamma\vdash B':s}{\Gamma\vdash A:B'}$。\\
 		
-		其中$B':s$，但是$\lambda{\underline{\omega}}$中并没有对类(kind)的抽象，如$\lambda\kappa:\square.M$，也没有相对应的应用，换句话说，当$s\equiv\square$时，所有的$B$与$B'$应当是恒等的（不包括$\beta$-等价），这样理解是否正确？
+		其中$B':s$，但是$\lambda{\uline{\omega}}$中并没有对类(kind)的抽象，如$\lambda\kappa:\square.M$，也没有相对应的应用，换句话说，当$s\equiv\square$时，所有的$B$与$B'$应当是恒等的（不包括$\beta$-等价），这样理解是否正确？
 
 	\section{类型构造子}
 		\noindent
@@ -44,7 +45,7 @@
 		
 		需要注意的是，在上一章中，提到了*是所有（$\mathbb{T}2$）类型的类型，而$*,*\rightarrow*,...$等类型不属于$\mathbb{T}2$，因此它们的类型也不是*。以及在$\lambda\alpha:*.\alpha\rightarrow\alpha$中，$\alpha\rightarrow\alpha$的类型是*而不是$*\rightarrow*$，是因为$\alpha\rightarrow\alpha$是一个接收类型为$\alpha$的输入值，返回类型为$\alpha$的输出值的函数的类型，而$*\rightarrow*$是一个接收类型，返回类型的函数的类型。
 		
-		上述扩展称作依赖于类型的类型（types depending on types），扩展后的系统记为$\lambda{\underline{\omega}}$。
+		上述扩展称作依赖于类型的类型（types depending on types），扩展后的系统记为$\lambda{\uline{\omega}}$。
 			
 		所有的超级类型，单独的*以及箭头分割的若干*符号，称为类（kind），所有类的集合$\mathbb{K}$的抽象定义为：
 		
@@ -82,17 +83,17 @@
 	
 		对于语句$A:B$，可以得出$B$所处的层级一定比$A$高一级，比如当$A$是一个项时，$B$是一个类型，或者$A$是一个类型时，$B\equiv*$。
 		
-	\section{$\lambda{\underline{\omega}}$中的类别规则和变量规则，sort-rule and var-rule in $\lambda{\underline{\omega}}$}
+	\section{$\lambda{\uline{\omega}}$中的类别规则和变量规则，sort-rule and var-rule in $\lambda{\uline{\omega}}$}
 		\noindent
-		本章中描述的系统叫做$\lambda{\underline{\omega}}$，它是$\lambda{\rightarrow}$的另一个扩展：
+		本章中描述的系统叫做$\lambda{\uline{\omega}}$，它是$\lambda{\rightarrow}$的另一个扩展：
 		
 		\noindent
 		- $\lambda{2} = \lambda{\rightarrow}$ 加\ 依赖于类型的项，
 		
 		\noindent
-		- $\lambda{\underline{\omega}} = \lambda{\rightarrow}$ 加\ 依赖于类型的类型。
+		- $\lambda{\uline{\omega}} = \lambda{\rightarrow}$ 加\ 依赖于类型的类型。
 		
-		给出$\lambda{\underline{\omega}}$的具体推导规则。
+		给出$\lambda{\uline{\omega}}$的具体推导规则。
 		
 		首先形式化$*$的类型是$\square$，这个规则称为类别规则（sort-rule）：
 		
@@ -101,9 +102,9 @@
 			(类别，sort) $\emptyset \vdash *:\square$
 		\end{thm}
 	
-		为了确定给定的上下文中所有的声明都是可推导的，在$\lambda{2}$和$\lambda{\underline{\omega}}$中使用变量规则（(var)-rule）推导。但是在$\lambda{\underline{\omega}}$中，我们用有一点不同的方式：巧妙地将上下文声明的可推导性与构造合适的上下文相结合。
+		为了确定给定的上下文中所有的声明都是可推导的，在$\lambda{2}$和$\lambda{\uline{\omega}}$中使用变量规则（(var)-rule）推导。但是在$\lambda{\uline{\omega}}$中，我们用有一点不同的方式：巧妙地将上下文声明的可推导性与构造合适的上下文相结合。
 		
-		原因是$\lambda{\underline{\omega}}$中的类型更为复杂，所以必须保证类型的定义是良构的（well-formed）。在$\lambda{\rightarrow}$中，合法类型的集合已经预先给出，所以没有问题，而在$\lambda{2}$中，必须确定一个（合适的）$\lambda{2}$-上下文，这个上下文也提供了在其中使用到的类型需要的条件（requirements），见定义3.4.4(3)，$\rho$中出现的所有自由类型变量需要在上下文中声明，此时才可以推定$\rho$的良构与否。因此，与$\lambda{\rightarrow}$不同，$\lambda{2}$中出现在一个推定（judgement）中的类型的合法性不再能通过引用外部的集合来判定，但是应该依赖于包括其上下文的自身推定的一个检查。
+		原因是$\lambda{\uline{\omega}}$中的类型更为复杂，所以必须保证类型的定义是良构的（well-formed）。在$\lambda{\rightarrow}$中，合法类型的集合已经预先给出，所以没有问题，而在$\lambda{2}$中，必须确定一个（合适的）$\lambda{2}$-上下文，这个上下文也提供了在其中使用到的类型需要的条件（requirements），见定义3.4.4(3)，$\rho$中出现的所有自由类型变量需要在上下文中声明，此时才可以推定$\rho$的良构与否。因此，与$\lambda{\rightarrow}$不同，$\lambda{2}$中出现在一个推定（judgement）中的类型的合法性不再能通过引用外部的集合来判定，但是应该依赖于包括其上下文的自身推定的一个检查。
 		
 		在现在的系统中，类型需要的条件更加严格：出现在一个推定中的类型的合法性只取决于（follow）我们是否可以形式化地推导出它。
 		
@@ -126,7 +127,7 @@
 		
 		第(1)行由(sort)规则推导而出，(1)-(2)以及(2)-(3)都应用了(var)规则。同时可以清楚地发现，新的(var)规则没有$\lambda{\rightarrow}$中的(var)规则通用，因为当前的(var)规则只允许推导出上下文中新添加的最后的声明$x:A$，而$\lambda{\rightarrow}$中，任意出现在$\Gamma$的声明$x:\sigma$都是可推导的。
 		
-		如在$\lambda\rightarrow$中一样，我们也希望在$\lambda{\underline{\omega}}$中可以推导$\alpha:*,x:\alpha\vdash\alpha:*$，$\alpha:*,\beta:*\vdash\alpha:*$以及$\alpha:*,\beta:*\vdash\beta:*$。但目前尚不可行，因为缺少(var)规则需要的$\bf premiss$，需要注意的是，尽管$\alpha:*,\beta:*\vdash\beta:*$中$\beta:*$是上下文中最后一个声明，但我们不能得到$\bf premiss$：
+		如在$\lambda\rightarrow$中一样，我们也希望在$\lambda{\uline{\omega}}$中可以推导$\alpha:*,x:\alpha\vdash\alpha:*$，$\alpha:*,\beta:*\vdash\alpha:*$以及$\alpha:*,\beta:*\vdash\beta:*$。但目前尚不可行，因为缺少(var)规则需要的$\bf premiss$，需要注意的是，尽管$\alpha:*,\beta:*\vdash\beta:*$中$\beta:*$是上下文中最后一个声明，但我们不能得到$\bf premiss$：
 		
 		$\alpha:*\vdash*:\square$。
 		
@@ -134,7 +135,7 @@
 		
 		为了解决这个问题，引入了所谓的弱化规则（weakening rule）。
 		
-	\section{$\lambda{\underline{\omega}}$中的弱化规则(weakening rule)}
+	\section{$\lambda{\uline{\omega}}$中的弱化规则(weakening rule)}
 		\noindent
 		弱化规则允许我们通过添加新的声明来弱化一个推定（judgement）的上下文。
 		
@@ -147,15 +148,15 @@
 		
 		需要注意的是第二个$\bf premiss$，添加的声明的类型需要是可推导出的类型或类（kind），与(var)规则类似。
 		
-		在添加了弱化规则以后，前边所提到的稀疏引理（Thinning Lemma）在$\lambda{\underline{\omega}}$中依然成立，即子上下文可以推定出来的语句在扩展后的上下文中依然可以推定，尽管弱化规则只允许在尾部添加声明。
+		在添加了弱化规则以后，前边所提到的稀疏引理（Thinning Lemma）在$\lambda{\uline{\omega}}$中依然成立，即子上下文可以推定出来的语句在扩展后的上下文中依然可以推定，尽管弱化规则只允许在尾部添加声明。
 		
 		现在便可以推导$\alpha:*,x:\alpha\vdash\alpha:*$，推导树：\\
 		
 		$\cfrac{\cfrac{(1)\ \emptyset\vdash*:\square}{(2)\ \alpha:*\vdash\alpha:*}\ (var)\ \ \ \cfrac{(1)\ \emptyset\vdash*:\square}{(2)\ \alpha:*\vdash\alpha:*}\ (var)}{(3)\ \alpha:*,x:\alpha\vdash\alpha:*}\ (weak)$
 		
-	\section{$\lambda{\underline{\omega}}$中的形成规则（formation rule）}
+	\section{$\lambda{\uline{\omega}}$中的形成规则（formation rule）}
 		\noindent
-		在$\lambda{2}$中，有一个叫做(form)的形成规则，用于在一个上下文中类型化语句的构造，这个规则基于$\lambda{2}$-类型的集合$\mathbb{T}2$，正如之前提到的，$\lambda{\underline{\omega}}$中的类型更为复杂，因此，引入了一个“真正”的推导规则，包含$\bf premisses$和$\bf conclusion$，用于类型（以及类(kind)）的构造：
+		在$\lambda{2}$中，有一个叫做(form)的形成规则，用于在一个上下文中类型化语句的构造，这个规则基于$\lambda{2}$-类型的集合$\mathbb{T}2$，正如之前提到的，$\lambda{\uline{\omega}}$中的类型更为复杂，因此，引入了一个“真正”的推导规则，包含$\bf premisses$和$\bf conclusion$，用于类型（以及类(kind)）的构造：
 		
 		\begin{thm}（形成规则，formation rule）\\
 			
@@ -168,9 +169,9 @@
 		
 		例如：$\dfrac{\emptyset\vdash*:\square\ \ \ \emptyset\vdash*:\square}{\emptyset\vdash*\rightarrow*:\square}\ (form)$
 		
-	\section{$\lambda{\underline{\omega}}$中的应用与抽象规则}
+	\section{$\lambda{\uline{\omega}}$中的应用与抽象规则}
 		\noindent
-		$\lambda{\underline{\omega}}$中的这两个规则与之前略有不同，首先，用于类型的元变量（meta-variable）的名字不同，因为$\lambda{\underline{\omega}}$中的类型更为通用，其次，需要保证类型是良构的（即可以由上下文推导出）:
+		$\lambda{\uline{\omega}}$中的这两个规则与之前略有不同，首先，用于类型的元变量（meta-variable）的名字不同，因为$\lambda{\uline{\omega}}$中的类型更为通用，其次，需要保证类型是良构的（即可以由上下文推导出）:
 		
 		\begin{thm}（应用规则）\\
 			
@@ -227,7 +228,7 @@
 		
 		需要注意的是，推定中对象（subject），即$A:B$中的$A$进行规约后的类型不变，且仍可被推导出，而这一定理可以由之前的规则推出，不再赘述。
 		
-		至此，所有的$\lambda{\underline{\omega}}$-规则如下：
+		至此，所有的$\lambda{\uline{\omega}}$-规则如下：
 		
 		\fbox{\shortstack[l]{
 			\\(sort) $\emptyset \vdash *:\square$\\
@@ -239,9 +240,9 @@
 			(conv) 如果$B=_\beta B'$，则$\cfrac{\Gamma\vdash A:B\ \ \ \Gamma\vdash B':s}{\Gamma\vdash A:B'}$
 		}}
 	
-	\section{$\lambda{\underline{\omega}}$的性质}
+	\section{$\lambda{\uline{\omega}}$的性质}
 		\noindent
-		$\lambda{\underline{\omega}}$满足之前几章所提到的大部分性质，但是类型唯一性引理需要进行调整：
+		$\lambda{\uline{\omega}}$满足之前几章所提到的大部分性质，但是类型唯一性引理需要进行调整：
 		
 		\begin{lemma}（类型唯一性引理）
 			
