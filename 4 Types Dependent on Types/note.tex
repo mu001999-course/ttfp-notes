@@ -15,6 +15,13 @@
 \maketitle
 		\noindent
 		本章将介绍另一个扩充$\lambda{\rightarrow}$的系统$\lambda{\underline{\omega}}$，而非在$\lambda{2}$上继续扩充的系统。
+		
+	\section{疑问}
+		在4.7变换规则中：\\
+		
+		(conv) 如果$B=_\beta B'$，则$\dfrac{\Gamma\vdash A:B\ \ \ \Gamma\vdash B':s}{\Gamma\vdash A:B'}$。\\
+		
+		其中$B':s$，但是$\lambda{\underline{\omega}}$中并没有对类(kind)的抽象，如$\lambda\kappa:\square.M$，也没有相对应的应用，换句话说，当$s\equiv\square$时，所有的$B$与$B'$应当是恒等的（不包括$\beta$-等价），这样理解是否正确？
 
 	\section{类型构造子}
 		\noindent
@@ -128,6 +135,7 @@
 		为了解决这个问题，引入了所谓的弱化规则（weakening rule）。
 		
 	\section{$\lambda{\underline{\omega}}$中的弱化规则(weakening rule)}
+		\noindent
 		弱化规则允许我们通过添加新的声明来弱化一个推定（judgement）的上下文。
 		
 		\begin{thm}（弱化规则，weakening rule）
@@ -146,6 +154,7 @@
 		$\cfrac{\cfrac{(1)\ \emptyset\vdash*:\square}{(2)\ \alpha:*\vdash\alpha:*}\ (var)\ \ \ \cfrac{(1)\ \emptyset\vdash*:\square}{(2)\ \alpha:*\vdash\alpha:*}\ (var)}{(3)\ \alpha:*,x:\alpha\vdash\alpha:*}\ (weak)$
 		
 	\section{$\lambda{\underline{\omega}}$中的形成规则（formation rule）}
+		\noindent
 		在$\lambda{2}$中，有一个叫做(form)的形成规则，用于在一个上下文中类型化语句的构造，这个规则基于$\lambda{2}$-类型的集合$\mathbb{T}2$，正如之前提到的，$\lambda{\underline{\omega}}$中的类型更为复杂，因此，引入了一个“真正”的推导规则，包含$\bf premisses$和$\bf conclusion$，用于类型（以及类(kind)）的构造：
 		
 		\begin{thm}（形成规则，formation rule）\\
@@ -160,6 +169,7 @@
 		例如：$\dfrac{\emptyset\vdash*:\square\ \ \ \emptyset\vdash*:\square}{\emptyset\vdash*\rightarrow*:\square}\ (form)$
 		
 	\section{$\lambda{\underline{\omega}}$中的应用与抽象规则}
+		\noindent
 		$\lambda{\underline{\omega}}$中的这两个规则与之前略有不同，首先，用于类型的元变量（meta-variable）的名字不同，因为$\lambda{\underline{\omega}}$中的类型更为通用，其次，需要保证类型是良构的（即可以由上下文推导出）:
 		
 		\begin{thm}（应用规则）\\
@@ -175,6 +185,7 @@
 		需要注意的是，因为$s\in\{*,\square\}$，所以这些规则（包括之前定义的）都同时具有两种作用，比如当$s\equiv*$时，$A\rightarrow B$是一个第二层的类型，如$(\alpha\rightarrow\beta)\rightarrow\gamma$，当$s\equiv\square$时，$A\rightarrow B$就是一个第三层的类型（或者说类,kind），如$(*\rightarrow*)\rightarrow*$。
 		
 	\section{简化（shortened）推导}
+		\noindent
 		为了保证推导系统的严谨性以及完整性所定义的这些规则，导致在推导的过程中有许多很无趣以及显而易见的部分，比如在推导$\alpha:*,\beta:*\vdash\alpha\rightarrow\beta:*$时，需要下面这些推定：
 	
 		$\emptyset\vdash*:\square$ (sort),
@@ -198,4 +209,42 @@
 		为了将注意力放在真正有趣的步骤上，我们将允许跳过如上的所有推定，或者只确定某个类型的良构与否。因此$\alpha:*,\beta:*\vdash\alpha\rightarrow\beta:*$现在可以直接使用。
 		
 	\section{变换（conversion）规则}
+		\noindent
+		变换规则的定义如下：
+		
+		\begin{thm}（变换规则，conversion rule）\\
+			
+			(conv) 如果$B=_\beta B'$，则$\dfrac{\Gamma\vdash A:B\ \ \ \Gamma\vdash B':s}{\Gamma\vdash A:B'}$。
+		\end{thm}
+	
+		需要注意的是，因为$B$是作为推定$\Gamma\vdash A:B$中的一个类型，所以$B$已经是良构的。为了保证$B'$也是良构的，添加了第二个$\bf premiss$：$\Gamma\vdash B':s$，保证了$B'$也是良构的类型或类(kind)。
+		
+		需要注意的是，$\beta$-规约不保证类型匹配，换而言之，$B=_\beta B'$无法保证$B$是良构时$B'$是良构的，比如$\beta\rightarrow\gamma=_\beta(\lambda\alpha:*.\beta\rightarrow\gamma)M$，右边在进行$\beta$-规约时，并不检查$M$的类型，而只是进行符号的替换，当$M$的类型不是*时，右边即不是良构的。
+		
+		在拥有了变换规则之后，我们可以进行如下推导，其中令$\Gamma\equiv\beta:*,x:(\lambda\alpha:*.\alpha\rightarrow\alpha)\beta$：
+		
+		$\cfrac{\Gamma\vdash x:(\lambda\alpha:*.\alpha\rightarrow\alpha)\beta\ \ \ \Gamma\vdash\beta\rightarrow\beta:*}{\Gamma\vdash x:\beta\rightarrow\beta}$ (conv)
+		
+		需要注意的是，推定中对象（subject），即$A:B$中的$A$进行规约后的类型不变，且仍可被推导出，而这一定理可以由之前的规则推出，不再赘述。
+		
+		至此，所有的$\lambda{\underline{\omega}}$-规则如下：
+		
+		\fbox{\shortstack[l]{
+			\\(sort) $\emptyset \vdash *:\square$\\
+			(var) 如果$x\not\in\Gamma$，则$\cfrac{\Gamma\vdash A:s}{\Gamma,x:A\vdash x:A}$\\
+			(weak) 如果$x\not\in\Gamma$，则$\cfrac{\Gamma\vdash A:B\ \ \ \Gamma\vdash C:s}{\Gamma,x:C\vdash A:B}$\\
+			(form)\ $\cfrac{\Gamma\vdash A:s\ \ \ \Gamma\vdash B:s}{\Gamma\vdash A\rightarrow B:s}$\\
+			(appl) $\cfrac{\Gamma\vdash M:A\rightarrow B\ \ \ \Gamma\vdash N:A}{\Gamma\vdash MN:B}$\\
+			(abst) $\cfrac{\Gamma,x:A\vdash M:B\ \ \ \Gamma\vdash A\rightarrow B:s}{\Gamma\vdash\lambda x:A.M:A\rightarrow B}$\\
+			(conv) 如果$B=_\beta B'$，则$\cfrac{\Gamma\vdash A:B\ \ \ \Gamma\vdash B':s}{\Gamma\vdash A:B'}$
+		}}
+	
+	\section{$\lambda{\underline{\omega}}$的性质}
+		\noindent
+		$\lambda{\underline{\omega}}$满足之前几章所提到的大部分性质，但是类型唯一性引理需要进行调整：
+		
+		\begin{lemma}（类型唯一性引理）
+			
+			如果$\Gamma\vdash A:B_1$且$\Gamma\vdash A:B_2$，则$B_1=_\beta B_2$。
+		\end{lemma}
 \end{document}
