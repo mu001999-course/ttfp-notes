@@ -1,0 +1,101 @@
+\documentclass[UTF8,aspectratio=169,mathserif]{beamer}
+\usepackage{ctex}
+\usepackage{ulem}
+\usepackage{color}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usetheme{Berlin}
+\setbeamertemplate{navigation symbols}{}
+
+\title{依赖于类型的类型}
+\subtitle{Types Depending on Types}
+\author{报告人：许博}
+\date{}
+
+\begin{document}
+	
+	\begin{frame}
+		\titlepage
+	\end{frame}
+
+	\begin{frame}{目录}
+		\tableofcontents
+	\end{frame}
+
+	\section{类型构造子}
+	\begin{frame}{类型构造子}
+		\begin{block}{$\lambda{\rightarrow}$}
+			$\lambda x:\alpha.x$
+		\end{block}
+		
+		\begin{block}{$\lambda{2},\ \lambda{\rightarrow}\ + $ terms depending on types}
+			$\lambda\alpha:*.\lambda x:\alpha.x$
+			
+			$(\lambda\alpha:*.\lambda x:\alpha.x)\beta\rightarrow_\beta\lambda x:\beta.x$
+		\end{block}
+	
+		\begin{block}{$\lambda{\underline{\omega}},\ \lambda{\rightarrow}\ + $ types depending on types}
+			$\beta\rightarrow\beta,\gamma\rightarrow\gamma,...$ 等具有结构$\lozenge\rightarrow\lozenge$的类型，其中箭头的左右是一样的类型
+			
+			\textcolor{red}{$\lambda\alpha:*.\alpha\rightarrow\alpha$，类型构造子}
+			
+			$(\lambda\alpha:*.\alpha\rightarrow\alpha)\beta\rightarrow_\beta\beta\rightarrow\beta$
+		\end{block}
+	\end{frame}
+
+	\begin{frame}{类型构造子的类型，超级类型}
+		\begin{block}{$\lambda\alpha:*.\alpha\rightarrow\alpha$的类型}
+			$\alpha:*$
+			
+			$\alpha\rightarrow\alpha:*$
+			
+			$\lambda\alpha:*.\alpha\rightarrow\alpha:*\rightarrow*$
+			
+			$\lambda\alpha:*.\lambda\beta:*.\alpha\rightarrow\beta:*\rightarrow(*\rightarrow*)$
+		\end{block}
+		\begin{block}{超级类型，记为类(kind)，$\mathbb{K}$}
+			$*, *\rightarrow*, *\rightarrow(*\rightarrow*), ...$
+			
+			$\mathbb{K}=*|(\mathbb{K}\rightarrow\mathbb{K})$
+		\end{block}
+		\begin{block}{超级超级类型，$\square$}
+			$*:\square, *\rightarrow*:\square, *\rightarrow(*\rightarrow*):\square, ...$
+		\end{block}
+	\end{frame}
+
+	\section{类别和变量规则}
+	\begin{frame}
+		$\lambda{\underline{\omega}}$
+	\end{frame}
+
+	\section{弱化规则(weakening rule)}
+	\begin{frame}
+		
+	\end{frame}
+
+	\section{形成规则(formation rule)}
+	\begin{frame}
+		
+	\end{frame}
+
+	\section{应用与抽象规则}
+	\begin{frame}
+		
+	\end{frame}
+
+	\section{简化(shortened)推导}
+	\begin{frame}
+		
+	\end{frame}
+
+	\section{变换(conversion)规则}
+	\begin{frame}
+		
+	\end{frame}
+
+	\section{性质}
+	\begin{frame}
+		
+	\end{frame}
+	
+\end{document}
