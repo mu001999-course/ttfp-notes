@@ -23,79 +23,278 @@
 	\end{frame}
 
 	\section{类型构造子}
-	\begin{frame}{类型构造子}
-		\begin{block}{$\lambda{\rightarrow}$}
-			$\lambda x:\alpha.x$
-		\end{block}
+		\begin{frame}{引入类型构造子}
+			\begin{block}{$\lambda{\rightarrow}$}
+				$\lambda x:\alpha.x$
+			\end{block}
+			
+			\begin{block}{$\lambda{2},\ \lambda{\rightarrow}\ + $ terms depending on types}
+				$\lambda\alpha:*.\lambda x:\alpha.x$
+				
+				$(\lambda\alpha:*.\lambda x:\alpha.x)\beta\rightarrow_\beta\lambda x:\beta.x$
+			\end{block}
 		
-		\begin{block}{$\lambda{2},\ \lambda{\rightarrow}\ + $ terms depending on types}
-			$\lambda\alpha:*.\lambda x:\alpha.x$
-			
-			$(\lambda\alpha:*.\lambda x:\alpha.x)\beta\rightarrow_\beta\lambda x:\beta.x$
-		\end{block}
+			\begin{block}{$\lambda{\underline{\omega}},\ \lambda{\rightarrow}\ + $ types depending on types}
+				$\beta\rightarrow\beta,\gamma\rightarrow\gamma,...$ 等具有结构$\lozenge\rightarrow\lozenge$的类型，其中箭头的左右是一样的类型
+				
+				\textcolor{red}{$\lambda\alpha:*.\alpha\rightarrow\alpha$，类型构造子}
+				
+				$(\lambda\alpha:*.\alpha\rightarrow\alpha)\beta\rightarrow_\beta\beta\rightarrow\beta$
+			\end{block}
+		\end{frame}
 	
-		\begin{block}{$\lambda{\underline{\omega}},\ \lambda{\rightarrow}\ + $ types depending on types}
-			$\beta\rightarrow\beta,\gamma\rightarrow\gamma,...$ 等具有结构$\lozenge\rightarrow\lozenge$的类型，其中箭头的左右是一样的类型
-			
-			\textcolor{red}{$\lambda\alpha:*.\alpha\rightarrow\alpha$，类型构造子}
-			
-			$(\lambda\alpha:*.\alpha\rightarrow\alpha)\beta\rightarrow_\beta\beta\rightarrow\beta$
-		\end{block}
-	\end{frame}
-
-	\begin{frame}[shrink]{类型构造子的类型，超级类型}
-		\begin{block}{$\lambda\alpha:*.\alpha\rightarrow\alpha$的类型}
-			$\alpha:*$
-			
-			$\alpha\rightarrow\alpha:*$
-			
-			$\lambda\alpha:*.\alpha\rightarrow\alpha:*\rightarrow*$
-			
-			$\lambda\alpha:*.\lambda\beta:*.\alpha\rightarrow\beta:*\rightarrow(*\rightarrow*)$
-		\end{block}
-		\begin{block}{超级类型，记为类(kind)，$\mathbb{K}$}
-			$*, *\rightarrow*, *\rightarrow(*\rightarrow*), ...$
-			
-			$\mathbb{K}=*|(\mathbb{K}\rightarrow\mathbb{K})$
-		\end{block}
-		\begin{block}{超级超级类型，$\square$}
-			$*:\square, *\rightarrow*:\square, *\rightarrow(*\rightarrow*):\square, ...$
-		\end{block}
-	\end{frame}
+		\begin{frame}[shrink]{类型构造子的类型，超级类型}
+			\begin{block}{类型构造子的类型}
+				$\alpha:*$
+				
+				$\alpha\rightarrow\alpha:*$
+				
+				$\lambda\alpha:*.\alpha\rightarrow\alpha:*\rightarrow*$
+				
+				$\lambda\alpha:*.\lambda\beta:*.\alpha\rightarrow\beta:*\rightarrow(*\rightarrow*)$
+			\end{block}
+			\begin{block}{超级类型，记为类(kind)，$\mathbb{K}$}
+				$*, *\rightarrow*, *\rightarrow(*\rightarrow*), ...$
+				
+				$\mathbb{K}=*|(\mathbb{K}\rightarrow\mathbb{K})$
+			\end{block}
+			\begin{block}{超级超级类型，$\square$，仅有一个}
+				$*:\square, *\rightarrow*:\square, *\rightarrow(*\rightarrow*):\square, ...$
+			\end{block}
+		\end{frame}
+	
+		\begin{frame}[shrink]{类型构造子}
+			\begin{exampleblock}{定义4.1.4（构造子，真构造子，类别）}
+				(1) 如果$\kappa:\square$且$M:\kappa$，则$M$是一个构造子，如果$\kappa\not\equiv*$，则$M$是一个真构造子
+				
+				(2) 类别（$s$）的集合为$\{*,\square\}$
+			\end{exampleblock}
+			\begin{columns}
+				\begin{column}{0.48\textwidth}
+					\begin{block}{类型构造子的定义}
+						如果$\kappa$是一个类(kind)，则对于每个类型是$\kappa$的M(即$M:\kappa$)，M被称作是一个类型构造子，简称为构造子
+						
+						因为$*:\square,\alpha:*$，所以$\alpha$或者$\alpha\rightarrow\alpha$也都是构造子
+					\end{block}
+				\end{column}
+				\begin{column}{0.475\textwidth}
+					\begin{block}{真构造子}
+						使用真构造子（proper constructor）表示不是类型的构造子（即类型不是$*$的构造子）。
+					\end{block}
+				\end{column}
+			\end{columns}
+			\begin{block}{类别(sort), s}
+				使用类别(sort)或符号$s$表示$*$或$\square$。
+			\end{block}
+		\end{frame}
+	
+		\begin{frame}{四个层级(level)}
+			\begin{exampleblock}{定义4.1.6（层级，level）}
+				第1层：项（terms）；
+				
+				第2层：构造子（包括类型和真构造子）；
+				
+				第3层：类（kinds）；
+				
+				第4层：超级超级类型$\square$。
+			\end{exampleblock}
+		
+			对于语句$A:B$，可以得出$B$所处的层级一定比$A$高一级，比如当$A$是一个项时，$B$是一个类型，或者$A$是一个类型时，$B\equiv*$。
+		\end{frame}
 
 	\section{类别和变量规则}
-	\begin{frame}
-		$\lambda{\underline{\omega}}$
-	\end{frame}
+		\begin{frame}{类别规则}
+			\begin{exampleblock}{定义4.2.1（类别规则，sort-rule）}
+				(sort) $\emptyset \vdash *:\square$
+			\end{exampleblock}
+		
+			形式化$*$的类型是$\square$，$*:\square$可以由空的上下文推导出。
+		\end{frame}
+	
+		\begin{frame}{良构(well-formed)的类型定义}
+			给定的上下文中所有的声明都需要是可推导的。
+			\begin{columns}
+				\begin{column}{0.48\textwidth}
+					\begin{block}{定义2.4.5（$\lambda{\rightarrow}$的var-rule）}
+						如果$x:\sigma\in\Gamma$，则$\Gamma\vdash x:\sigma$
+					\end{block}
+					对于$\lambda{\rightarrow}$上下文中出现的类型，合法类型的集合已经给出，可以直接判断合法与否。
+				\end{column}
+				\begin{column}{0.48\textwidth}
+					\begin{block}{定义3.4.6（$\lambda{2}$的var-rule）}
+						如果$\Gamma$是一个$\lambda{2}$-上下文且$x:\sigma\in\Gamma$，则$\Gamma\vdash x:\sigma$
+					\end{block}
+					$\lambda{2}$的类型复杂一点，需要类型中的自由类型变量在上下文中已声明，因此类型的合法与否依赖于推定的上下文。
+				\end{column}
+			\end{columns}
+		\end{frame}
+		
+		\begin{frame}{$\lambda{\uline{\omega}}$中的变量规则}
+			\begin{exampleblock}{定义4.2.2（变量规则，var-rule）}
+				(var) 如果$x\not\in\Gamma$，则$\dfrac{\Gamma\vdash A:s}{\Gamma,x:A\vdash x:A}$
+			\end{exampleblock}
+			推定中的类型的合法与否取决于是否可以被形式化地推导出。
+			
+			% 这里要求可形式化地推导是因为类型复杂且依赖上下文，不能通过预先生成的集合和上下文判断是否合法。类型跨越了两个层级，不能通过一个产生式生成集合。
+			
+			$x\not\in\Gamma$保证了变量$x$未在$\Gamma$中出现，因此声明在一个上下文中的所有的变量都是不同的，避免了变量名相同（类型不同）时造成的混淆。
+		\end{frame}
+	
+		\begin{frame}
+			\begin{block}{应用(sort)和(var)规则的一个例子}
+				$\cfrac{\cfrac{(1)\ \emptyset\vdash*:\square}{(2)\ \alpha:*\vdash\alpha:*}\ (var)}{(3)\ \alpha:*,x:\alpha\vdash x:\alpha}\ (var)$
+				
+				只能推导出上下文中新添加的最后一个声明。
+			\end{block}
+		
+			\begin{block}{不能推导的例子}
+				$\alpha:*,x:\alpha\vdash\alpha:*$
+				
+				$\alpha:*,\beta:*\vdash\alpha:*$
+				
+				$\alpha:*,\beta:*\vdash\beta:*$
+				
+				最后一个例子中，不能得到$\bf premiss$：$\alpha:*\vdash*:\square$
+			\end{block}
+		\end{frame}
 
 	\section{弱化规则(weakening rule)}
-	\begin{frame}
+		\begin{frame}{$\lambda{\uline{\omega}}$中的弱化规则(weakening rule)}
+			\begin{exampleblock}{定义4.3.1（弱化规则，weakening rule）}
+				(weak) 如果$x\not\in\Gamma$，则$\dfrac{\Gamma\vdash A:B\ \ \ \Gamma\vdash C:s}{\Gamma,x:C\vdash A:B}$
+			\end{exampleblock}
 		
-	\end{frame}
+			若上下文$\Gamma$已经可以推导出$A:B$，在$\Gamma$的尾部添加了一个任意的声明（弱化）后仍然可以推导出$A:B$。需要注意的是添加的声明的类型需要是可推导出的。
+		
+			\begin{block}{推导$\alpha:*,x:\alpha\vdash\alpha:*$}
+				$\cfrac{\cfrac{(1)\ \emptyset\vdash*:\square}{(2)\ \alpha:*\vdash\alpha:*}\ (var)\ \ \ \cfrac{(1)\ \emptyset\vdash*:\square}{(2)\ \alpha:*\vdash\alpha:*}\ (var)}{(3)\ \alpha:*,x:\alpha\vdash\alpha:*}\ (weak)$
+			\end{block}
+		
+			% 在添加了这条规则之后，之前的稀疏引理便可以在$\lambda{\uline{\omega}}$中成立。
+		\end{frame}
 
 	\section{形成规则(formation rule)}
-	\begin{frame}
-		
-	\end{frame}
+		\begin{frame}
+			\begin{columns}
+				\begin{column}{0.48\textwidth}
+					\begin{exampleblock}{定义4.4.1（形成规则，formation rule）}
+						(form)\ $\dfrac{\Gamma\vdash A:s\ \ \ \Gamma\vdash B:s}{\Gamma\vdash A\rightarrow B:s}$
+					\end{exampleblock}
+				\end{column}
+				\begin{column}{0.48\textwidth}
+					\begin{block}{定义3.4.7（$\lambda{\rightarrow}$中的形成规则，formation rule in $\lambda{\rightarrow}$）}
+						(form) 如果$\Gamma$是一个$\lambda{2}$-上下文，$B\in\mathbb{T}2$且$B$中所有的自由类型变量已经在$\Gamma$中声明，则$\Gamma\vdash B:*$
+					\end{block}
+				\end{column}
+			\end{columns}
+			
+			规则中出现的三个$s$是相同的，同时表示*或$\square$。
+			
+			在引入新的(form)规则之前，由(var)规则与(weak)规则只能推导出$*:\square,\alpha:*,x:\alpha$而不能推出箭头类型$*\rightarrow*:\square$以及$\alpha\rightarrow\beta:*$等。引入新的形成规则可以覆盖我们需要的所有类型和类（kind）。
+			
+			\begin{block}{例子}
+				$\dfrac{\emptyset\vdash*:\square\ \ \ \emptyset\vdash*:\square}{\emptyset\vdash*\rightarrow*:\square}\ (form)$
+			\end{block}
+			
+		\end{frame}
 
 	\section{应用与抽象规则}
-	\begin{frame}
+		\begin{frame}
+			\begin{columns}
+				\begin{column}{0.48\textwidth}
+					\begin{exampleblock}{应用规则，application rule）}
+						(appl) $\dfrac{\Gamma\vdash M:A\rightarrow B\ \ \ \Gamma\vdash N:A}{\Gamma\vdash MN:B}$
+					\end{exampleblock}
+				\end{column}
+				\begin{column}{0.48\textwidth}
+					\begin{exampleblock}{抽象规则，abstraction rule）}
+						(abst) $\dfrac{\Gamma,x:A\vdash M:B\ \ \ \Gamma\vdash A\rightarrow B:s}{\Gamma\vdash\lambda x:A.M:A\rightarrow B}$
+					\end{exampleblock}
+				\end{column}
+			\end{columns}
 		
-	\end{frame}
+			\hspace*{\fill} \\
+			
+			$\lambda{\uline{\omega}}$中的这两个规则与之前略有不同：
+			
+			\begin{itemize}
+				\item 用于类型的元变量（meta-variable）的名字不同，因为$\lambda{\uline{\omega}}$中的类型更为通用
+				
+				\item 需要保证类型是良构的（即可以由上下文推导出）
+			\end{itemize}
+			
+			当$s\equiv*$时，$A\rightarrow B$是一个第二层的类型，如$(\alpha\rightarrow\beta)\rightarrow\gamma$，
+			
+			当$s\equiv\square$时，$A\rightarrow B$就是一个第三层的类(kind)，如$(*\rightarrow*)\rightarrow*$。
+		\end{frame}
 
 	\section{简化(shortened)推导}
-	\begin{frame}
-		
-	\end{frame}
+		\begin{frame}{简化(shortened)推导}
+			\begin{block}{推导$\alpha:*,\beta:*\vdash\alpha\rightarrow\beta:*$，需要以下推定：}
+				$\emptyset\vdash*:\square$ (sort),
+				
+				$\alpha:*\vdash\alpha:*$ (var),
+				
+				$\alpha:*\vdash*:\square$ (weak),
+				
+				$\alpha:*,\beta:*\vdash\alpha:*$ (weak),
+				
+				$\alpha:*,\beta:*\vdash\beta:*$ (var)。
+			\end{block}
+			
+			允许跳过以下推导过程：
+			
+			(i) 当使用规则(sort),(var)和(weak)时，
+			
+			(ii) 当使用规则(form)时，以及
+			
+			(iii) 当确定(abst)规则的第二个$\bf premiss$的合法性时。
+			
+			因此$\alpha:*,\beta:*\vdash\alpha\rightarrow\beta:*$现在可以直接使用。
+		\end{frame}
 
 	\section{变换(conversion)规则}
-	\begin{frame}
+		\begin{frame}
+			\begin{exampleblock}{定义4.7.1（变换规则，conversion rule）}
+				(conv) 如果$B=_\beta B'$，则$\dfrac{\Gamma\vdash A:B\ \ \ \Gamma\vdash B':s}{\Gamma\vdash A:B'}$
+			\end{exampleblock}
 		
-	\end{frame}
+			$B$作为已知推定$\Gamma\vdash A:B$的部分是良构的，$\Gamma\vdash B':s$保证$B'$也是良构的。而$B=_\beta B'$无法保证$B'$是良构的，比如$\beta\rightarrow\gamma=_\beta(\lambda\alpha:*.\beta\rightarrow\gamma)M$。
+			
+			\begin{block}{例子}
+				令$\Gamma\equiv\beta:*,x:(\lambda\alpha:*.\alpha\rightarrow\alpha)\beta$：
+				
+				$\cfrac{\Gamma\vdash x:(\lambda\alpha:*.\alpha\rightarrow\alpha)\beta\ \ \ \Gamma\vdash\beta\rightarrow\beta:*}{\Gamma\vdash x:\beta\rightarrow\beta}$ (conv)
+			\end{block}
+		\end{frame}
+	
+		\begin{frame}[shrink]{$\lambda{\uline{\omega}}$-规则}
+			(sort) $\emptyset \vdash *:\square$
+			
+			(var) 如果$x\not\in\Gamma$，则$\cfrac{\Gamma\vdash A:s}{\Gamma,x:A\vdash x:A}$
+			
+			(weak) 如果$x\not\in\Gamma$，则$\cfrac{\Gamma\vdash A:B\ \ \ \Gamma\vdash C:s}{\Gamma,x:C\vdash A:B}$
+			
+			(form)\ $\cfrac{\Gamma\vdash A:s\ \ \ \Gamma\vdash B:s}{\Gamma\vdash A\rightarrow B:s}$
+			
+			(appl) $\cfrac{\Gamma\vdash M:A\rightarrow B\ \ \ \Gamma\vdash N:A}{\Gamma\vdash MN:B}$
+			
+			(abst) $\cfrac{\Gamma,x:A\vdash M:B\ \ \ \Gamma\vdash A\rightarrow B:s}{\Gamma\vdash\lambda x:A.M:A\rightarrow B}$
+			
+			(conv) 如果$B=_\beta B'$，则$\cfrac{\Gamma\vdash A:B\ \ \ \Gamma\vdash B':s}{\Gamma\vdash A:B'}$\\
+		\end{frame}
 
 	\section{性质}
-	\begin{frame}
+		\begin{frame}{$\lambda{\uline{\omega}}$的性质}
+			$\lambda{\uline{\omega}}$满足之前几章所提到的大部分性质，但是类型唯一性引理需要进行调整：
+			
+			\begin{exampleblock}{引理4.8.1（类型唯一性引理）}
+				如果$\Gamma\vdash A:B_1$且$\Gamma\vdash A:B_2$，则$B_1=_\beta B_2$
+			\end{exampleblock}
 		
-	\end{frame}
+			\begin{block}{引理2.10.9（适用于$\lambda{\rightarrow}$的类型唯一性引理）}
+				假设$\Gamma\vdash M:\sigma$且$\Gamma\vdash M:\tau$，则$\sigma\equiv\tau$
+			\end{block}
+		\end{frame}
 	
 \end{document}
