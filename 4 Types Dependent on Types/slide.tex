@@ -188,9 +188,9 @@
 				\end{column}
 			\end{columns}
 			
-			规则中出现的三个$s$是相同的，同时表示*或$\square$。
+			三个$s$同时表示*或$\square$。
 			
-			在引入新的(form)规则之前，由(var)规则与(weak)规则只能推导出$*:\square,\alpha:*,x:\alpha$而不能推出箭头类型$*\rightarrow*:\square$以及$\alpha\rightarrow\beta:*$等。引入新的形成规则可以覆盖我们需要的所有类型和类（kind）。
+			在引入新的(form)规则之前，由(var)规则与(weak)规则只能推导出$*:\square,\alpha:*,x:\alpha$而不能推出箭头类型$*\rightarrow*:\square$以及$\alpha\rightarrow\beta:*$等。
 			
 			\begin{block}{例子}
 				$\dfrac{\emptyset\vdash*:\square\ \ \ \emptyset\vdash*:\square}{\emptyset\vdash*\rightarrow*:\square}\ (form)$
@@ -202,12 +202,12 @@
 		\begin{frame}
 			\begin{columns}
 				\begin{column}{0.48\textwidth}
-					\begin{exampleblock}{应用规则，application rule）}
+					\begin{exampleblock}{应用规则，application rule}
 						(appl) $\dfrac{\Gamma\vdash M:A\rightarrow B\ \ \ \Gamma\vdash N:A}{\Gamma\vdash MN:B}$
 					\end{exampleblock}
 				\end{column}
 				\begin{column}{0.48\textwidth}
-					\begin{exampleblock}{抽象规则，abstraction rule）}
+					\begin{exampleblock}{抽象规则，abstraction rule}
 						(abst) $\dfrac{\Gamma,x:A\vdash M:B\ \ \ \Gamma\vdash A\rightarrow B:s}{\Gamma\vdash\lambda x:A.M:A\rightarrow B}$
 					\end{exampleblock}
 				\end{column}
