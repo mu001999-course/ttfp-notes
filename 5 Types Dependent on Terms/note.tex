@@ -1,0 +1,35 @@
+\documentclass[UTF8]{article}
+\usepackage{ctex}
+\usepackage{ulem}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\newtheorem{thm}{定义}[section]
+\newtheorem{notation}[thm]{记号}
+\newtheorem{lemma}[thm]{引理}
+
+\title{依赖于项的类型\\[2ex]\begin{large}读书笔记\end{large}}
+\author{许博}
+\date{}
+
+\begin{document}
+\maketitle
+	\section{遗失的扩展}
+		之前已经引入了依赖于项的项，依赖于类型的项以及依赖于类型的类型，本章将在$\lambda{\rightarrow}$的基础上引入依赖于项的类型，记为$\lambda{\rm P}$。
+		
+		一个依赖于一个项的类型具有如下一般形式：
+		
+		\begin{center}
+			$\lambda x:A.M$，
+		\end{center}
+	
+		其中$M$是一个类型，$x$是一个项变量（所以$A$必须是一个类型）。抽象$\lambda x:A.M$依赖于项$x$。
+		
+		与 Remark 4.1.2 相对应，一个依赖于项的类型事实上是一个类型作为值的函数或者类型构造子。
+		
+		将$M$特化成集合或命题，看看依赖于项的类型的用处：
+		
+		(1) 令$S_n$是一个对于任一$n:nat$的集合，将集合看作是类型。$\lambda n:nat.S_n$是一个函数映射项$n$到集合$S_n$，所谓的集合作为值的函数。其它的术语是，这个抽象是一个类型族（a family of types）或者一个索引类型（被$n:nat$索引）。显而易见的是，$\lambda n:nat.S_n$的类型是$nat\rightarrow*$。
+		
+		(2) 令$P_n$是一个对于任一$m:nat$的命题，将命题看作类型。
+\end{document}
