@@ -1,0 +1,33 @@
+\documentclass[UTF8]{article}
+\usepackage{ctex}
+\usepackage{ulem}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\newtheorem{thm}{定义}[section]
+\newtheorem{notation}[thm]{记号}
+\newtheorem{lemma}[thm]{引理}
+
+\makeatletter
+\newcommand{\rmnum}[1]{\romannumeral #1}
+\newcommand{\Rmnum}[1]{\expandafter\@slowromancap\romannumeral #1@}
+\makeatother
+
+\title{$\lambda{\rm C}$中逻辑概念的编码\\The encoding of logical notions in $\lambda{\rm C}$\\[2ex]\begin{large}读书笔记\end{large}}
+\author{许博}
+\date{}
+
+\begin{document}
+\maketitle
+	\section{类型理论中的谬论（absurdity）与否定（negation）}
+	\noindent
+	在章节 5.4 中，通过编码蕴含式$A\Rightarrow B$为函数类型$A\rightarrow B$，模拟蕴含式的行为，包括它的导入和消解规则。因为$\lambda{\rm P}$是$\lambda{\rm C}$的一部分，所以$\lambda{\rm C}$中同样拥有最小谓词逻辑。
+	
+		本章将处理更多的接词（connective），比如否定（$\neg$），合取（$\land$）和析取（$\lor$）。这些在$\lambda{\rm P}$中不能表示，但在$\lambda{\rm C}$中存在非常优雅的方式去编码这些概念。
+		
+		将否定$\neg A$看作蕴含式$A\Rightarrow \bot$，其中$\bot$是“谬论（absurdity）”，也可以称为“矛盾（contradiction）”。因此$\neg A$被解释为“$A$蕴含了谬论”。为了这个目标，我们需要谬论的编码：
+		
+	\noindent
+	\textit{\Rmnum{1}. 谬论，Absurdity}\\
+	命题“谬论”或$\bot$的一个独特的性质是：如果$\bot$为真，则每一个命题都为真。
+\end{document}
