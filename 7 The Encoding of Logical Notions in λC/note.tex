@@ -21,7 +21,7 @@
 \maketitle
 	\section{疑问}
 	\noindent
-	P142. 析取的表示$A\lor B\equiv\Pi C:*.(A\rightarrow C)\rightarrow(B\rightarrow C)\rightarrow C$，对它的解释为：\textit{If A implies C and also B implies C, then C holds on its own}。为什么这里的$A$和$B$是或的关系？
+	1. P142. 析取的表示$A\lor B\equiv\Pi C:*.(A\rightarrow C)\rightarrow(B\rightarrow C)\rightarrow C$，对它的解释为：\textit{If A implies C and also B implies C, then C holds on its own}。为什么这里的$A$和$B$是或的关系？是否因为其为真时满足($A\lor B$)为真，算是强行解释吗？
 
 	\section{类型理论中的谬论（absurdity）与否定（negation）}
 	\noindent
@@ -86,12 +86,56 @@
 		
 		($\land$-elim-left-sec) $\cfrac{\Pi C:*.(A\rightarrow B\rightarrow C)\rightarrow C}{A}$
 		
-		($\land$-elim-right-sec) $\cfrac{\Pi C:*.(A\rightarrow B\rightarrow C)\rightarrow C}{B}$ 
+		($\land$-elim-right-sec) $\cfrac{\Pi C:*.(A\rightarrow B\rightarrow C)\rightarrow C}{B}$ \\
 		
 	\noindent
 	\textit{\Rmnum{2}. 析取，Disjunction}\\
 	析取$A\lor B$的二阶编码：
 	
-	$A\lor B\equiv\Pi C:*.(A\rightarrow C)\rightarrow(B\rightarrow C)\rightarrow C$
+		$A\lor B\equiv\Pi C:*.(A\rightarrow C)\rightarrow(B\rightarrow C)\rightarrow C$
+		
+		与合取的讨论相似，右边的表达式可以读作：\textit{对于所有C，（A$\rightarrow$C蕴含（B$\rightarrow$C蕴含C））}。将$A,B,C$看作命题，则可以解释为：\textit{对于所有的命题C，如果A蕴含C并且B也蕴含C，则C取决于自身}，在逻辑上等价于：\textit{如果（A或B）蕴含C，则C成立（hold）}。（这里的逻辑等价可能是指真值表相同？）。条件是多余的，所以$A$或$B$必须成立。
+		
+		$\lor$在自然演绎中的规则：
+		
+		($\lor$-intro-left) $\cfrac{A}{A\lor B}$
+		
+		($\lor$-intro-right) $\cfrac{B}{A\lor B}$
+		
+		($\lor$-elim) $\cfrac{A\lor B\ \ \ A\Rightarrow C\ \ \ B\Rightarrow C}{C}$
+		
+		$\lor$在类型理论中二阶编码的规则：
+		
+		($\lor$-intro-left-sec) $\cfrac{A}{\Pi C:*.(A\rightarrow C)\rightarrow(B\rightarrow C)\rightarrow C}$
+		
+		($\lor$-intro-right-sec) $\cfrac{B}{\Pi C:*.(A\rightarrow C)\rightarrow(B\rightarrow C)\rightarrow C}$
+		
+		($\lor$-elim-sec) $\cfrac{\Pi D:*.(A\rightarrow D)\rightarrow(B\rightarrow D)\rightarrow D\ \ \ A\rightarrow C\ \ \ B\rightarrow C}{C}$
+		
+		至此，我们已经定义了类型理论中否定，合取以及析取的变体：
+		
+		$\neg A\equiv A\rightarrow\bot$
+		
+		$A\land B\equiv\Pi C:*.(A\rightarrow B\rightarrow C)\rightarrow C$
+		
+		$A\lor B\equiv\Pi C:*.(A\rightarrow C)\rightarrow(B\rightarrow C)\rightarrow C$
+		
+		但是在这三者中，$A,B$都是自由变量，因此引入单个连词使得可以用于更“抽象”的表达式：
+		
+		$\neg\equiv\lambda\alpha:*.(\alpha\rightarrow\bot)$
+		
+		$\land\equiv\lambda\alpha:*.\lambda\beta:*.\Pi\gamma:*.(\alpha\rightarrow\beta\rightarrow\gamma)\rightarrow\gamma$
+		
+		$\lor\equiv\lambda\alpha:*.\lambda\beta:*.\Pi\gamma:*.(\alpha\rightarrow\gamma)\rightarrow(\beta\rightarrow\gamma)\rightarrow\gamma$
+		
+		再引入了$\neg,\land,\lor$后，我们现在需要$\lambda{\omega}$，因为需要依赖于类型的类型。
 	
+	\section{$\lambda{\rm C}$中命题逻辑的一个例子}
+	\noindent
+	证明重言式：$(A\lor B)\Rightarrow(\neg A\Rightarrow B)$
+	
+	\noindent
+	\includegraphics[width=0.93\linewidth]{"../imgs/7-1.png"}
+	
+	需要注意的是，如$A\rightarrow B$不能直接通过上下文$A:*,B:*$推导出来，是因为没有$\bot$以产生一个类型为$B$的项。
 \end{document}
