@@ -21,7 +21,7 @@
 \maketitle
 	\section{疑问}
 	\noindent
-	1. P142. 析取的表示$A\lor B\equiv\Pi C:*.(A\rightarrow C)\rightarrow(B\rightarrow C)\rightarrow C$，对它的解释为：\textit{If A implies C and also B implies C, then C holds on its own}。为什么这里的$A$和$B$是或的关系？是否因为其为真时满足($A\lor B$)为真，算是强行解释吗？
+	1. P142. 析取的表示$A\lor B\equiv\Pi C:*.(A\rightarrow C)\rightarrow(B\rightarrow C)\rightarrow C$，对它的解释为：\textit{If A implies C and also B implies C, then C holds on its own}。为什么这里的$A$和$B$是或的关系？
 
 	\section{类型理论中的谬论（absurdity）与否定（negation）}
 	\noindent
@@ -112,6 +112,8 @@
 		
 		($\lor$-elim-sec) $\cfrac{\Pi D:*.(A\rightarrow D)\rightarrow(B\rightarrow D)\rightarrow D\ \ \ A\rightarrow C\ \ \ B\rightarrow C}{C}$
 		
+		在推导$A\lor B$时，当给定上下文中缺少$x:A$和$y:B$时（也即$A,B$都为假），无法构造出类型为$C$的项，故此时$A\lor B$为假。
+		
 		至此，我们已经定义了类型理论中否定，合取以及析取的变体：
 		
 		$\neg A\equiv A\rightarrow\bot$
@@ -134,8 +136,26 @@
 	\noindent
 	证明重言式：$(A\lor B)\Rightarrow(\neg A\Rightarrow B)$
 	
-	\noindent
-	\includegraphics[width=0.93\linewidth]{"../imgs/7-1.png"}
+		\noindent
+		\includegraphics[width=0.93\linewidth]{"../imgs/7-1.png"}
 	
-	需要注意的是，如$A\rightarrow B$不能直接通过上下文$A:*,B:*$推导出来，是因为没有$\bot$以产生一个类型为$B$的项。
+		需要注意的是，如$A\rightarrow B$不能直接通过上下文$A:*,B:*$推导出来，是因为没有$\bot$以产生一个类型为$B$的项。
+	
+	\section{$\lambda{\rm C}$中的经典（classical）逻辑}
+	\noindent
+	至此我们见到的逻辑是构造逻辑（constructive logic），有时也指直觉逻辑（intuitionistic logic），它没有经典逻辑那么强大。在经典逻辑中，有排中律（law of the excluded middle，EM）（书中为law of the excluded third，在网上并未查到相关说法，但为了与本书保持一致，之后皆以ET代指），对于任意$A$，$A\lor\neg A$都成立；还有双重否定律（double  negation law，DN），对于任意$A$，$\neg\neg A\Rightarrow A$都成立。这两个定律都无法通过我们至此所给出的规则（构造逻辑）推导得到。
+	
+		经典逻辑通常是我们想要的，因为它是在数学中最经常被使用的逻辑。扩展构造逻辑以获得经典逻辑。事实证明添加EM或DN就足够了。因为在构造逻辑中加入ET后可以推导出DN，反之亦然。
+		
+		以声明的方式添加ET公理：
+		
+		$i_{ET}:\Pi\alpha:*.\alpha\lor\neg\alpha$
+		
+	\section{$\lambda{\rm C}$中的谓词逻辑}
+	\noindent
+	至此我们已经编码了命题逻辑（包括构造逻辑和经典版本），接下来是谓词逻辑，我们需要找到量词$\forall$和$\exists$的编码。其中$\forall$在章节 5.4 中第\Rmnum{5}部分中已经完成，只剩下存在量词$\exists$。
+	
+		$\exists$的一阶定义即$\exists_{x\in S}(P(x))\equiv\neg\forall_{x\in S}(\neg P(x))$，只在经典逻辑中有效（works）。$\exists$的一个更为通用的二阶编码为：
+		
+		$\exists_{x\in S}(P(x))\equiv\Pi\alpha:*.((\Pi x:S.(Px\rightarrow\alpha))\rightarrow\alpha)$
 \end{document}
