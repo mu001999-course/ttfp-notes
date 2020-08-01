@@ -19,6 +19,10 @@
 
 \begin{document}
 \maketitle
+	\section{疑问}
+	\noindent
+	P142. 析取的表示$A\lor B\equiv\Pi C:*.(A\rightarrow C)\rightarrow(B\rightarrow C)\rightarrow C$，对它的解释为：\textit{If A implies C and also B implies C, then C holds on its own}。为什么这里的$A$和$B$是或的关系？
+
 	\section{类型理论中的谬论（absurdity）与否定（negation）}
 	\noindent
 	在章节 5.4 中，通过编码蕴含式$A\Rightarrow B$为函数类型$A\rightarrow B$，模拟蕴含式的行为，包括它的导入和消解规则。因为$\lambda{\rm P}$是$\lambda{\rm C}$的一部分，所以$\lambda{\rm C}$中同样拥有最小谓词逻辑。
@@ -85,6 +89,9 @@
 		($\land$-elim-right-sec) $\cfrac{\Pi C:*.(A\rightarrow B\rightarrow C)\rightarrow C}{B}$ 
 		
 	\noindent
-	\textit{\Roman{2}. 析取，Disjunction}\\
+	\textit{\Rmnum{2}. 析取，Disjunction}\\
+	析取$A\lor B$的二阶编码：
+	
+	$A\lor B\equiv\Pi C:*.(A\rightarrow C)\rightarrow(B\rightarrow C)\rightarrow C$
 	
 \end{document}
