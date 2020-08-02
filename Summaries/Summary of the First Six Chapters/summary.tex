@@ -1,0 +1,35 @@
+\documentclass[UTF8]{article}
+\usepackage{ctex}
+\usepackage{ulem}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\newtheorem{thm}{定义}[section]
+\newtheorem{notation}[thm]{记号}
+\newtheorem{lemma}[thm]{引理}
+
+\makeatletter
+\newcommand{\rmnum}[1]{\romannumeral #1}
+\newcommand{\Rmnum}[1]{\expandafter\@slowromancap\romannumeral #1@}
+\makeatother
+
+\title{前六章的总结}
+\author{许博}
+\date{}
+
+\begin{document}
+\maketitle
+	第一章从无类型的$\lambda$演算的说明开始，$\lambda$演算是以函数的行为作为基础的演算，包括变量绑定和替换。并且形式化定义了无类型$\lambda$演算，包括它的构造规则以及求值规则等，诸如$\alpha$变换以及$\beta$规约等也都进行了定义。除此了无类型$\lambda$演算的形式化规则以外，第一章还讨论了这个系统所满足的一些定理和引理，比如不动点定理等等。最后列出了无类型的$\lambda$演算的积极和消极的方面，积极的方面比如无类型的$\lambda$演算是图灵完备的，消极的方面比如允许一些没有意义的项的出现等等。
+	
+	而在第一章引出了无类型的$\lambda$演算之后，无类型的$\lambda$演算具有一些缺陷，而这些缺陷基本上都是由于其过于自由导致的，因此引出了类型，为这个系统添加一些限制，类型也在本书的剩余部分起到重要的作用（毕竟书名就是类型理论）。第二章到第六章的部分，每一章都会在之前的系统上进行扩展，以及添加相对应的规则，然后引出一个新的推导系统，这些系统适用的地方不同，所具有的特点也有不同，其中第六章并未引入新的概念，而是将之前引出的系统组合成一个系统。
+	
+	第二章引出了简单类型的$\lambda$演算$\lambda{\rightarrow}$，它是在无类型的$\lambda$演算的基础上扩展了简单类型，约束了函数的绑定变量的类型，使得在应用时的应用的左右类型相互匹配。本章对只对项的类型做了规定，但在此基础上，引出了类型理论中需要解决的三种问题：Well-typedness, Type Checking 和 Term Finding。除此之外还引出了PAT-解释，将$\lambda$演算与逻辑证明相联系。
+	
+	第三章在$\lambda{\rightarrow}$的基础上扩展了依赖于类型的项，引出了系统$\lambda{2}$，依赖于类型的项可以用来构造不指定具体类型的项。由于类型和项并不处于同一阶，因此$\lambda{2}$中存在二阶抽象和应用，并且增加了$\Pi$类型以表示在类型中可能存在的自由类型变量。
+	
+	第四章在$\lambda{\rightarrow}$（而非$\lambda{2}$）的基础上扩展了依赖于类型的类型，引出了系统$\lambda{\uline{\omega}}$，在本章中引入了类型构造子以及种类（kind）的概念，对类型的结构进行了抽象。$\lambda{\uline{\omega}}$中依赖于类型的类型和类型处于同一阶，因此不存在$\Pi$类型。
+	
+	第五章在$\lambda{\rightarrow}$的基础上扩展了依赖于项的类型，引出了系统$\lambda{\rm P}$。$\lambda{\rm P}$允许我们形式化谓词，并且根据PAT-解释，可以通过$\lambda{\rm P}$构建出最小谓词逻辑。
+	
+	第六章将第二章到第五章引出的系统综合，引入了$\lambda$立方体的概念，得到一个具有以上扩展的系统$\lambda{\rm C}$，综合了上述系统的特点。而$\lambda{\rm C}$作为一个大而全（相对于之前的系统）的推导系统，也是本书剩余部分的基础。
+\end{document}
