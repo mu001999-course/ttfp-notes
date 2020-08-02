@@ -19,10 +19,6 @@
 
 \begin{document}
 \maketitle
-	\section{疑问}
-	\noindent
-	1. P142. 析取的表示$A\lor B\equiv\Pi C:*.(A\rightarrow C)\rightarrow(B\rightarrow C)\rightarrow C$，对它的解释为：\textit{If A implies C and also B implies C, then C holds on its own}。为什么这里的$A$和$B$是或的关系？
-
 	\section{类型理论中的谬论（absurdity）与否定（negation）}
 	\noindent
 	在章节 5.4 中，通过编码蕴含式$A\Rightarrow B$为函数类型$A\rightarrow B$，模拟蕴含式的行为，包括它的导入和消解规则。因为$\lambda{\rm P}$是$\lambda{\rm C}$的一部分，所以$\lambda{\rm C}$中同样拥有最小谓词逻辑。
@@ -94,7 +90,7 @@
 	
 		$A\lor B\equiv\Pi C:*.(A\rightarrow C)\rightarrow(B\rightarrow C)\rightarrow C$
 		
-		与合取的讨论相似，右边的表达式可以读作：\textit{对于所有C，（A$\rightarrow$C蕴含（B$\rightarrow$C蕴含C））}。将$A,B,C$看作命题，则可以解释为：\textit{对于所有的命题C，如果A蕴含C并且B也蕴含C，则C取决于自身}，在逻辑上等价于：\textit{如果（A或B）蕴含C，则C成立（hold）}。（这里的逻辑等价可能是指真值表相同？）。条件是多余的，所以$A$或$B$必须成立。
+		与合取的讨论相似，右边的表达式可以读作：\textit{对于所有C，（A$\rightarrow$C蕴含（B$\rightarrow$C蕴含C））}。将$A,B,C$看作命题，则可以解释为：\textit{对于所有的命题C，如果A蕴含C并且B也蕴含C，则C取决于自身}，在逻辑上等价于：\textit{如果（A或B）蕴含C，则C成立（hold）}。条件是多余的，所以$A$或$B$必须成立。我的理解是需要整个蕴含式推出$C\rightarrow C$，则它的前件需要推出$C$，所以条件中的$A\rightarrow C$和$B\rightarrow C$不可同时为重言式，也即$A$和$B$不可同时为假。
 		
 		$\lor$在自然演绎中的规则：
 		
@@ -158,4 +154,32 @@
 		$\exists$的一阶定义即$\exists_{x\in S}(P(x))\equiv\neg\forall_{x\in S}(\neg P(x))$，只在经典逻辑中有效（works）。$\exists$的一个更为通用的二阶编码为：
 		
 		$\exists_{x\in S}(P(x))\equiv\Pi\alpha:*.((\Pi x:S.(Px\rightarrow\alpha))\rightarrow\alpha)$
+		
+		将$\Pi$读作$\forall$，$\rightarrow$读作$\Rightarrow$，可以试着翻译为：
+		
+		"对于所有$\alpha$：
+		
+		$\ \ $如果我们知道对于$S$中所有的x都有$Px$蕴含$\alpha$，
+		
+		$\ \ \ \ $则$\alpha$成立。"
+		
+		同析取中类似，为保证命题为真，则所有的$Px\rightarrow \alpha$中的前件不能全部为假，全部为假时，命题的真假性由$\alpha$决定，因为$\alpha$的不恒为真，因此命题为假。
+		
+		$\exists$的自然演绎规则：
+		
+		($\exists$-elim) $\cfrac{\exists_{x\in S}P(x)\ \ \ \forall_{x\in S}(P(x)\Rightarrow A)}{A}$
+		
+		($\exists$-intro) $\cfrac{a\in S\ \ \ P(a)}{\exists_{x\in S}(P(x))}$
+		
+		$\exists$在类型理论中的二阶规则：
+		
+		($\exists$-elim-sec) $\cfrac{\Pi\alpha:*.((\Pi x:S.(Px\rightarrow\alpha))\rightarrow\alpha)\ \ \ \Pi x:S.(Px\rightarrow A)}{A}$
+		
+		($\exists$-intro-sec) $\cfrac{a:S\ \ \ Pa}{\Pi\alpha:*.((\Pi x:S.(Px\rightarrow\alpha))\rightarrow\alpha)}$
+		
+		现在已经有了$\exists_{x\in S}(P(x))\equiv\Pi\alpha:*.((\Pi x:S.(Px\rightarrow\alpha))\rightarrow\alpha)$，但在其中$S$和$P$都是自由变量，正如之前所为，我们可以从这些变量进行抽象，以包括它们的类型：
+		
+		$\exists\equiv\lambda S:*.\lambda P:S\rightarrow *.\Pi\alpha:*.((\Pi x:S.(Px\rightarrow\alpha))\rightarrow\alpha)$
+		
+		同时可有$\exists SP\rightarrow_\beta\Pi\alpha:*.((\Pi x:S.(Px\rightarrow\alpha))\rightarrow\alpha)$
 \end{document}
