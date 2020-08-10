@@ -117,4 +117,32 @@
 			
 			(3) $\overline{x}:\overline{A}$表示上下文$x_1:A_1,...,x_n:A_n$
 		\end{notation}
+	
+	\section{依赖于假设的定义}
+	\noindent
+	存在定义依赖于假设，比如定义最小元素的时候，通常已经假设了给定集合在给定关系上是偏序的。此时在上下文中添加假设：
+	
+		\noindent
+		\includegraphics[width=0.93\linewidth]{"../imgs/8-1.png"}
+	
+	\section{给证明以名字}
+	\noindent
+	在之前给出的定义中，定义过以下常量：\\
+	- 集合，类型为$*$；\\
+	- 成员，类型为一个集合；\\
+	- 命题，类型为$*$。
+	
+		其中定义成员，有如$c:=\cfrac{1+\sqrt{5}}{2}$，类似地，我们可以定义命题的证明。
+		
+		如：
+		
+		\noindent
+		\includegraphics[width=0.93\linewidth]{"../imgs/8-2.png"}
+		
+		其中$\bf formalproof$是命题$\exists x,y:\mathbb{Z}.(mx+ny=1)$的一个证明，而其之前的声明$u:...$是一个假设，也即在此假设下，存在命题的一个证明，接下来我们可以给该证明一个名字：
+		
+		\noindent
+		\includegraphics[width=0.93\linewidth]{"../imgs/8-3.png"}
+		
+		如此一来，在之后实例化时，证明可以直接复用。
 \end{document}
