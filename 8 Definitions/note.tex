@@ -54,4 +54,23 @@
 		- 避免引入递归定义带来的复杂性，比如需要表明每个递归定义表示一个对每个输入都有唯一结果的可终止算法
 		
 		一个显而易见的缺陷是，类似$fac$的函数不是一个程序，因此也不能被执行。作为后果，$fac(3)=6$需要一个证明。
+		
+	\section{定义的格式}
+	\noindent
+	我们从数学中引用如下用于定义的标准格式：
+		
+		$a:=\mathcal{E}$
+		
+		表示$a$被定义为$\mathcal{E}$，则$a$是给$\mathcal{E}$的名字，$\mathcal{E}$是一个描述值得被命名或记住的概念的表达式。
+		
+		\begin{thm}（Definiendum, defined name, defined constant, definiens）
+			
+			- 在$a:=\mathcal{E}$中，名字$a$被称作$definiendum$（被定义的东西，the thing to be defined），也被称作$defined name$或$defined constant$
+			
+			- 表达式$\mathcal{E}$是$definiens$，即“定义的东西，the thing that defines”或“确定了含义是什么的表达式”。
+		\end{thm}
+	
+		我的理解是$definiendum$是被下定义的项，而$definiens$是下定义的项所定义的东西，因此 the thing that defines 中的 that 指代了 the thing to be defined。
+		
+		对于其它更复杂的定义，需要一些“环境，setting”，通过作为上下文形式化。为了便于阅读，定义会跟随参数列表，比如“递增，increasing”需要从集合$\mathbb{R}$到集合$\mathbb{R}$的函数$f$，通过在上下文中引入$\mathbb{R}$和$f:\mathbb{R}\rightarrow\mathbb{R}$，然后以$increasing(f) := ...$表示。尽管其中的参数列表可以省略，但为了便于阅读不予省略（除非参数列表为空）。
 \end{document}
