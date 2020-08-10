@@ -85,4 +85,36 @@
 		(2) “生命之路，path of life”，当在不同的情况下使用时，通过对于参数的不同实例化
 		
 		我认为便于定义的参数实例化，也是参数列表跟随定义的一个重要原因。
+		
+	\section{用于定义的形式化格式}
+	\noindent
+	之前所提到的定义具有如下形式：
+	
+		$\Gamma\triangleright a(x_1,...,x_n):=\mathcal{E}$
+		
+		其中$\Gamma$是一个上下文，$a$是一个后缀参数列表的常量（definiendum），被定义为$\mathcal{E}$（definiens）。引入符号$\triangleright$作为上下文和剩余部分的分隔符。因此这个表达式的含义为：
+		
+		在上下文$\Gamma$中，我们定义$a(x_1,...,x_n)$为$\mathcal{E}$。
+		
+		因为我们工作在一个类型化的环境中，需要为 definiens 添加类型，也同样是 definiendum 的类型，因此格式变为：
+		
+		$\Gamma\triangleright a(x_1,...,x_n):=M:N$，\\
+		其中 M 是 definiens 而 N 是它的类型，同样也是$a(x_1,...,x_n)$的类型。
+		
+		参数列表$(x_1,...,x_n)$包含了上下文中的主体变量，因此一个定义形如：
+		
+		$x_1:A_1,...,x_n:A_n\triangleright a(x_1,...,x_n):=M:N$。
+		
+		其中$n$是一个自然数，所以可为 0 （如果$\Gamma$为空上下文）。后文中使用一个缩写的表示用以通用格式：
+		
+		$\overline{x}:\overline{A}\triangleright a(\overline{x}):=M:N$
+		
+		在元语言（meta-language）中使用如下缩写：
+		
+		\begin{notation}(1) $\overline{x}$表示变量的列表$x_1,...,x_n$
+			
+			(2) $\overline{A}$表示表达式的列表$A_1,...,A_n$
+			
+			(3) $\overline{x}:\overline{A}$表示上下文$x_1:A_1,...,x_n:A_n$
+		\end{notation}
 \end{document}
