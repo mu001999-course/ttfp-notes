@@ -21,5 +21,48 @@
 \maketitle
 	\section{$\lambda{\rm C}$扩展到系统$\lambda{\rm D_0}$}
 	\noindent
-	本章探究类型系统中添加定义的形式方面。
+	本章在$\lambda{\rm C}$的基础上扩展通常意义上定义的形式化版本，也即所谓的描述性定义（descriptive definitions）。扩展后的系统$\lambda{\rm D_0}$尚不能完全支持公理以及公理概念的表示，相应的扩展会在下一章引入$\lambda{\rm D}$时说明。
+	
+		为给出$\lambda{\rm D_0}$的合适的描述，首先扩展表达式的集合。$\lambda{\rm D_0}$中的表达式与$\lambda{\rm D}$中相同，因此记集合为$\mathcal{E}_{\lambda{\rm D}}$。
+		
+		假设除了之前定义的变量集合$V$以外，还有常量的集合$C$。使用符号$a,a_1,a_i,a',b,...$作为常量的名字，正如我们使用$x,x_1,x_i,x',y,...$作为变量的名字一样。另外，还假设变量和常量来自不相交的集合，而$*$和$\square$是特殊符号，不属于$V$和$C$：
+		
+		$V\cap C=\emptyset,\ *\not=\square,\ *,\square\notin V\cup C$
+		
+		\begin{thm}（$\mathcal{E}_{\lambda{\rm D}}$）
+			
+			$\mathcal{E}_{\lambda{\rm D}}=V|\square|*|(\mathcal{E}_{\lambda{\rm D}}\mathcal{E}_{\lambda{\rm D}})|(\lambda V:\mathcal{E}_{\lambda{\rm D}}.\mathcal{E}_{\lambda{\rm D}})|(\Pi V:\mathcal{E}_{\lambda{\rm D}}.\mathcal{E}_{\lambda{\rm D}})|C(\overline{\mathcal{E}_{\lambda{\rm D}}})$
+		\end{thm}
+	
+		其中$\overline{\mathcal{E}_{\lambda{\rm D}}}$中的上划线表示这是一个$\mathcal{E}_{\lambda{\rm D}}$-表达式的列表。
+		
+		引入“环境，environment”表示一个定义的列表。
+		
+		\begin{thm}（$\lambda{\rm D_0}$中的描述性定义；环境）
+			
+			\noindent
+			(1) 在$\mathcal{E}_{\lambda{\rm D}}$中，一个（描述性）定义具有形式
+			
+			$\overline{x}:\overline{A}\triangleright a(\overline{x}):=M:N$
+			
+			\noindent
+			其中所有的$x_i\in V,a\in C$，并且所有的$A_i,M,N\in\mathcal{E}_{\lambda{\rm D}}$
+			
+			\noindent
+			(2) 一个环境$\Delta$是一个有限（空或非空）的定义列表。
+		\end{thm}
+	
+		使用诸如$\mathcal{D},\mathcal{D}_i,...$等符号作为元名称表示定义。一个长度为$k$的环境可以被表示为如$\Delta\equiv\mathcal{D}_1,...,\mathcal{D}_k$。
+		
+		关于定义，区分以下元素:
+		
+		\begin{thm}（定义中的元素）
+			
+			\noindent
+			令$\mathcal{D}\equiv\overline{x}:\overline{A}\triangleright a(\overline{x}):=M:N$是一个定义。则：\\
+			- $\overline{x}:\overline{A}$是$\mathcal{D}$中的上下文\\
+			- $a$是$\mathcal{D}$中被定义的常量，$\overline{x}$是参数列表\\
+			- $a(\overline{x})$是$\mathcal{D}$中的$definiendum$\\
+			- $M:N$是$\mathcal{D}$中的语句，$M$是$definiens$或$\mathcal{D}$的主体，$N$是$\mathcal{D}$的类型。
+		\end{thm}
 \end{document}
