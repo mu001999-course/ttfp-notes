@@ -23,30 +23,30 @@
 	\noindent
 	本章在$\lambda{\rm C}$的基础上扩展通常意义上定义的形式化版本，也即所谓的描述性定义（descriptive definitions）。扩展后的系统$\lambda{\rm D_0}$尚不能完全支持公理以及公理概念的表示，相应的扩展会在下一章引入$\lambda{\rm D}$时说明。
 	
-		为给出$\lambda{\rm D_0}$的合适的描述，首先扩展表达式的集合。$\lambda{\rm D_0}$中的表达式与$\lambda{\rm D}$中相同，因此记集合为$\mathcal{E}_{\lambda{\rm D}}$。
+		为给出$\lambda{\rm D_0}$的合适的描述，首先扩展表达式的集合。$\lambda{\rm D_0}$中的表达式与$\lambda{\rm D}$中相同，因此记集合为$\mathcal{E}_{\lambda{D}}$。
 		
 		假设除了之前定义的变量集合$V$以外，还有常量的集合$C$。使用符号$a,a_1,a_i,a',b,...$作为常量的名字，正如我们使用$x,x_1,x_i,x',y,...$作为变量的名字一样。另外，还假设变量和常量来自不相交的集合，而$*$和$\square$是特殊符号，不属于$V$和$C$：
 		
 		$V\cap C=\emptyset,\ *\not=\square,\ *,\square\notin V\cup C$
 		
-		\begin{thm}（$\mathcal{E}_{\lambda{\rm D}}$）
+		\begin{thm}（$\mathcal{E}_{\lambda{D}}$）
 			
-			$\mathcal{E}_{\lambda{\rm D}}=V|\square|*|(\mathcal{E}_{\lambda{\rm D}}\mathcal{E}_{\lambda{\rm D}})|(\lambda V:\mathcal{E}_{\lambda{\rm D}}.\mathcal{E}_{\lambda{\rm D}})|(\Pi V:\mathcal{E}_{\lambda{\rm D}}.\mathcal{E}_{\lambda{\rm D}})|C(\overline{\mathcal{E}_{\lambda{\rm D}}})$
+			$\mathcal{E}_{\lambda{D}}=V|\square|*|(\mathcal{E}_{\lambda{D}}\mathcal{E}_{\lambda{D}})|(\lambda V:\mathcal{E}_{\lambda{D}}.\mathcal{E}_{\lambda{D}})|(\Pi V:\mathcal{E}_{\lambda{D}}.\mathcal{E}_{\lambda{D}})|C(\overline{\}})$
 		\end{thm}
 	
-		其中$\overline{\mathcal{E}_{\lambda{\rm D}}}$中的上划线表示这是一个$\mathcal{E}_{\lambda{\rm D}}$-表达式的列表。
+		其中$\overline{\}}$中的上划线表示这是一个$\}$-表达式的列表。
 		
 		引入“环境，environment”表示一个定义的列表。
 		
 		\begin{thm}（$\lambda{\rm D_0}$中的描述性定义；环境）
 			
 			\noindent
-			(1) 在$\mathcal{E}_{\lambda{\rm D}}$中，一个（描述性）定义具有形式
+			(1) 在$\mathcal{E}_{\lambda{D}}$中，一个（描述性）定义具有形式
 			
 			$\overline{x}:\overline{A}\triangleright a(\overline{x}):=M:N$
 			
 			\noindent
-			其中所有的$x_i\in V,a\in C$，并且所有的$A_i,M,N\in\mathcal{E}_{\lambda{\rm D}}$
+			其中所有的$x_i\in V,a\in C$，并且所有的$A_i,M,N\in\mathcal{E}_{\lambda{D}}$
 			
 			\noindent
 			(2) 一个环境$\Delta$是一个有限（空或非空）的定义列表。
@@ -65,4 +65,32 @@
 			- $a(\overline{x})$是$\mathcal{D}$中的$definiendum$\\
 			- $M:N$是$\mathcal{D}$中的语句，$M$是$definiens$或$\mathcal{D}$的主体，$N$是$\mathcal{D}$的类型。
 		\end{thm}
+
+	\section{以定义扩展推定}
+	\noindent
+	回顾$\lambda{\rm C}$中的推定，具有如下形式：
+	
+		$\Gamma\vdash M:N$
+		
+		但在$\lambda{\rm D_0}$中，这样的一个推定可能会依赖一些定义，因此我们在推定之前添加环境，使用元符号“;”分割环境与推定，因此包含定义的推定具有新的形式：
+		
+		\begin{thm}（包含定义的推定；扩展后的推定）
+			
+			$\Delta;\Gamma\vdash M:N$，\\
+			其中$\Delta$是一个环境，$\Gamma$是一个上下文以及$M,N\in\mathcal{E}_{\lambda{D}}$。
+		\end{thm}
+	
+		其含义为：“在环境$\Delta$和上下文$\Gamma$中，$M$具有类型$N$”。
+		
+		因此$M:N$由在其头部的列表$\Delta$和$\Gamma$修饰：\\
+		(1) 环境$\Delta$绑定了$M:N$中出现的常量，\\
+		(2) 上下文$\Gamma$绑定了$M:N$中出现的自由变量。
+		
+		在整个推定中，存在依赖关系，先出现的变量或常量可能会出现在之后出现的部分中，而后出现的变量或常量则不会出现在之前出现的部分中，尽管前后可能存在相同的名称，但并非表示的不同。
+		
+		与上下文相同，使用$\Delta,\mathcal{D}$表示在$\Delta$右边以$\mathcal{D}$进行扩展。
+		
+		因为暂且不考虑递归定义，因此在一个定义当中，被定义的常量只出现一次。
+		
+		再给出修改后的全部推到规则之前，将先引入规则($def$)和($inst$)，前者导入新的定义到已存在的环境中，而后者则是定义的实例化规则。
 \end{document}
