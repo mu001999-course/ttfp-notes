@@ -120,4 +120,50 @@
 			
 			(def) $\cfrac{\Delta;\Gamma\vdash K:L\ \ \ \Delta;\overline{x}:\overline{A}\vdash M:N}{\Delta,\mathcal{D};\Gamma\vdash K:L}$
 		\end{thm}
+
+	\section{用于实例化定义的规则}
+	\noindent
+	在实例化定义时，实例化一个参数可能会改变声明列表中的类型，因为定义中的上下文中后面出现的类型，可能依赖之前的声明，考虑一个具有如下形式的定义：
+	
+		$\mathcal{D}\equiv x_1:A_1,...,x_n:A_n\triangleright a(x_1,...,x_n):=M:N$
+		
+		对于每个变量$x_i$，使用表达式$U_i$进行实例化。对于$U_1$，实例化$x_1$时，需要满足条件$U_1:A_1$。而对于$U_2$，因为$A_2$可能依赖$x_1$，所以需要进行替换，因此$U_2$需要满足条件$U_2:A_2\left[x_1:=U_1\right]$。因此$U_3:A_3\left[x_1:=U_1,x_2:=U_2\right]$，需要注意的是，因为$x_1$到$x_n$都是$\mathcal{D}$中上下文的变量，因此$x_i$并不出现在$\mathcal{D}$之外，所以替换时同时替换还是顺序替换并不影响替换的结果。
+		
+		以此类推，对于$U_i$，需要满足条件$U_i:A_i\left[x_1:=U_1,...,x_{i-1}:=U_{i-1}\right]$。因为$x_i,...,x_n$不会出现在$A_i$中，所以对于每个表达式$U_i$所需条件的通用格式为：
+		
+		$U_i:A_i\left[x_1:=U_1,...,x_n:=U_n\right]$
+		
+		套用之前的缩写形式，使用$\left[\overline{x}:=\overline{U}\right]$作为替换$\left[x_1:=U_1,...,x_n:=U_n\right]$的缩写。因此对于每个$U_i$，应有$U_i:A_i\left[\overline{x}:=\overline{U}\right]$。再次使用上划线，以$\Delta;\Gamma\vdash\overline{U}:\overline{V}$作为列表$\Delta;\Gamma\vdash U_1:V_1,...,\Delta;\Gamma\vdash U_n:V_n$的缩写，此时规则的$\bf premisses$被缩写为$\Delta;\Gamma\vdash\overline{U}:\overline{A\left[\overline{x}:=\overline{U}\right]}$。
+		
+		而因为$a(\overline{x}):N$，因此$a(\overline{U}):N\left[\overline{x}:=\overline{U}\right]$，因此可以得到实例化规则（的一部分，因为不包括无参数的定义实例化）：
+		
+		\begin{thm}（用于实例化的规则，1）
+			
+			\noindent
+			令$a$为一个没有参数列表的常量，令$\mathcal{D}\in\Delta$，其中$\mathcal{D}\equiv\overline{x}:\overline{A}\triangleright a(\overline{x}):=M:N$，则：
+			
+			(inst-pos) $\cfrac{\Delta;\Gamma\vdash\overline{U}:\overline{A\left[\overline{x}:=\overline{U}\right]}}{\Delta;\Gamma\vdash a(\overline{U}):N\left[\overline{x}:=\overline{U}\right]}$
+		\end{thm}
+	
+		其中 pos 意为 positive，正数。
+		
+		对于没有参数列表的定义，$\bf premisses$ 会为空，此时无法保证 $\bf conclusion$ 中$\Delta;\Gamma$的良构与否（前文中规定由$\bf premisses$保证）。故此时添加一条简单的$\bf premiss$，以保证$\Delta;\Gamma$是良构的：
+		
+		\begin{thm}（用于实例化的推导规则，2）
+			
+			\noindent
+			令$a$为无参数列表的常量，令$\mathcal{D}\in\Delta$，其中$\mathcal{D}\equiv\emptyset\triangleright a():=M:N$，则：
+			
+			(inst-zero) $\cfrac{\Delta;\Gamma\vdash*:\square}{\Delta;\Gamma\vdash a():N}$
+		\end{thm}
+	
+		而将规则(inst-pos)和(inst-zero)结合便得到了规则(inst)以覆盖参数列表空和非空时的情况：
+		
+		\begin{thm}（用于实例化的推导规则）
+			
+			\noindent
+			令$a$为常量，令$\mathcal{D}\in\Delta$，其中$\mathcal{D}\equiv\overline{x}:\overline{A}\triangleright a(\overline{x}):=M:N$，则：
+			
+			(inst) $\cfrac{\Delta;\Gamma\vdash*:\square\ \ \ \Delta;\Gamma\vdash\overline{U}:\overline{A\left[\overline{x}:=\overline{U}\right]}}{\Delta;\Gamma\vdash a(\overline{U}):N\left[\overline{x}:=\overline{U}\right]}$
+		\end{thm}
 \end{document}
