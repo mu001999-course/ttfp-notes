@@ -93,4 +93,31 @@
 		因为暂且不考虑递归定义，因此在一个定义当中，被定义的常量只出现一次。
 		
 		再给出修改后的全部推到规则之前，将先引入规则($def$)和($inst$)，前者导入新的定义到已存在的环境中，而后者则是定义的实例化规则。
+		
+	\section{用于添加定义的规则}
+	\noindent
+	首先，描述如何扩展一个推定中的环境$\Delta$，它已被接受并且为正确的：
+	
+		(\rmnum{1}) $\Delta;\Gamma\vdash K:L$
+		
+		在其中添加一个新的并且良构的定义，需要保证添加的定义本身是良构的，考虑如下一个新的定义：
+		
+		$\mathcal{D}\equiv\overline{x}:\overline{A}\triangleright a(\overline{x}):=M:N$\\
+		期望将其添加至$\Delta$的尾部。
+		
+		因为$\Delta$中定义的常量，可能会出现在$\mathcal{D}$中，为了使$\mathcal{D}$是可接受的，需要$M:N$在上下文$\overline{x}:\overline{A}$以及环境$\Delta$中是可推导的。
+		
+		因此我们需要一个条件：
+		
+		(\rmnum{2}) $\Delta;\overline{x}:\overline{A}\vdash M:N$
+		
+		从而我们得到了规则(def)：
+		
+		\begin{thm}（用于添加一个定义到一个环境中的推到规则）
+			
+			\noindent
+			令$a$是一个未在$\Delta$中定义的新名字，且$\mathcal{D}\equiv\overline{x}:\overline{A}\triangleright a(\overline{x}):=M:N$
+			
+			(def) $\cfrac{\Delta;\Gamma\vdash K:L\ \ \ \Delta;\overline{x}:\overline{A}\vdash M:N}{\Delta,\mathcal{D};\Gamma\vdash K:L}$
+		\end{thm}
 \end{document}
