@@ -210,4 +210,36 @@
 		
 		\noindent
 		\includegraphics[width=0.93\linewidth]{"../imgs/9-2.png"}
+		
+	\section{以$M_i\stackrel{\Delta}{\rightarrow}$扩展变换规则}
+	\noindent
+	在引入了$\delta$-变换之后，需要在变换规则（Conversion rule）中包含它，简单地总结出我们所期望的：
+	
+		如果$\Delta;\Gamma\vdash A:B$且$B\stackrel{\Delta}{=}B'$，则也有$\Delta;\Gamma\vdash A:B'$。
+		
+		其中$B$是良构的，因为其是已有推定的一部分，而$B'$与之前讨论中类似，不能保证其良构与否，因此我们可以得到用于$\delta$-变换的变换规则：
+		
+		($\delta$-conv) 如果$B\stackrel{\Delta}{=}B'$，则$\cfrac{\Delta;\Gamma\vdash A:B\ \ \ \Delta;\Gamma\vdash B':s}{\Delta;\Gamma\vdash A:B'}$。
+		
+		除此之外，还需要修改$\beta$-规约的定义，使其包含实例化定义参数的情况：
+		
+		\begin{thm}（用于$\lambda{\rm D_0}$中表达式的一步$\beta$-规约，$\rightarrow_\beta$）\\
+			(1) (Basis) $(\lambda x:K.M)N\rightarrow_\beta M\left[x:=N\right]$\\
+			(2) (Compatibility) 假设$M\rightarrow_\beta N$，则也有$ML\rightarrow_\beta NL,LM\rightarrow_\beta LN,\lambda x:M.K\rightarrow_\beta\lambda x:N.K,\lambda x:K.M\rightarrow_\beta\lambda x:K.N,\Pi x:M.K\rightarrow_\beta\Pi x:N.K,\Pi x:K.M\rightarrow_\beta\Pi x:K.N$以及$a(\overline{U},M,\overline{V})\rightarrow_\beta a(\overline{U},N,\overline{V})$ 
+		\end{thm}
+	
+		$\twoheadrightarrow_\beta$和$=_\beta$的定义保持不变，因为这两者的定义依赖$\rightarrow_\beta$而非具体的表达式。
+		
+		现在可以给出一个组合了$\beta$-和$\delta$-变换的新的关系$\stackrel{\Delta}{=}_\beta$的定义：
+		
+		\begin{thm}（$\beta\delta$-变换，$\stackrel{\Delta}{=}_\beta$）\\
+			记$M\stackrel{\Delta}{=}_\beta N$，若存$n$个表达式$M_0$到$M_n$，且$M_0\equiv M$，$M_n\equiv N$以及对于所有$0\le i\lg n$有$M_i\rightarrow_\beta M_{i+1}$或$M_i\stackrel{\Delta}{\rightarrow}M_{i+1}$或$M_{i+1}\rightarrow_\beta M_i$或$M_{i+1}\stackrel{\Delta}{\rightarrow}M_i$。
+		\end{thm}
+	
+		此时便可以给出适用于$\lambda{\rm D_0}$的通用变换规则：
+		
+		\begin{thm}（用于$\beta$-$\delta$-变换的推导规则）
+			
+			($\beta\delta$-conv) 如果$B\stackrel{\Delta}{=}_\beta B'$，则$\cfrac{\Delta;\Gamma\vdash A:B\ \ \ \Delta;\Gamma\vdash B':s}{\Delta;\Gamma\vdash A:B'}$
+		\end{thm}
 \end{document}
