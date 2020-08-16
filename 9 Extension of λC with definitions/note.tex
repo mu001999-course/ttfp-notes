@@ -242,4 +242,25 @@
 			
 			($\beta\delta$-conv) 如果$B\stackrel{\Delta}{=}_\beta B'$，则$\cfrac{\Delta;\Gamma\vdash A:B\ \ \ \Delta;\Gamma\vdash B':s}{\Delta;\Gamma\vdash A:B'}$
 		\end{thm}
+	
+	\section{$\lambda{\rm D_0}$中的推导规则}
+	\noindent
+	其中$(s_1,s_2)$的可以为$(*,*),(\square,*),(\square,\square)$或$(*,\square)$：
+	
+		\noindent
+		\includegraphics[width=0.93\linewidth]{"../imgs/9-3.png"}
+		
+		其中变化之处主要在于$\Delta$的添加，定义的引入和实例化以及($conv$)规则的修改。
+		
+	\section{仔细研究$\lambda{\rm D_0}$的推导规则}
+	\noindent
+	观察($weak$)-规则和($def$)-规则，前者弱化了一个推定的上下文，在上下文的结尾添加新的声明，而后者弱化了一个推定的环境，在环境的结尾添加新的定义，两者都可以被认为是弱化规则，一个用于上下文，另一个用于环境。
+	
+		再观察规则($var$)和规则($inst$)，前者告诉了我们一个变量的类型是什么，变量作为上下文中最后一个声明的主体，并且它的类型是关于环境和上下文良构的；后者告诉了我们一个实例化的常量的类型是什么，类型也是关于环境和上下文良构的。因此这两个规则确定了$\lambda{\rm D_0}$中基本表达式的类型，从基本表达式开始，由其它规则构建出更加复杂的表达式。
+		
+		再次观察($var$)-规则，其表述在上下文中最后一个声明自身是关于一个合法的环境和上下文可推导的，而在定义相关的概念中，并没有类似的规则，也即“最后一个定义是关于一个合法的环境和上下文可推导的”，因为定义并不是一个语句，不满足出现在$\vdash$之后的格式要求。但可以从定义中提取出两个可接受的语句，也即$a(\overline{x}):N$和$M:N$，两者都是合法的语句，其中后者可以由($def$)-规则的第二个$\bf premiss$直接得到，后一个语句可推导则通过引入($par$)-规则：
+		
+		($par$) 如果$\mathcal{D}\equiv\overline{x}:\overline{A}\triangleright a(\overline{x}):=M:N$且$a\notin\Delta$，则$\cfrac{\Delta;\overline{x}:\overline{A}\vdash M:N}{\Delta,\mathcal{D};\overline{x}:\overline{A}\vdash a(\overline{x}):N}$
+		
+		需要注意的是这条规则不属于基础规则，同时在我们的理论研究中不需要考虑它。
 \end{document}
