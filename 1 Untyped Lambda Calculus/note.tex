@@ -216,19 +216,19 @@
 
 	$=_\beta$ 具有自反性，对称性以及传递性。
 
-\section{范式（normal forms）}
+\section{标准形式（normal forms）}
 
 	定义：
 	\begin{enumerate}
-		\item 如果 M 不能进行 $\beta$-规约，则 M 是满足 $\beta$-范式（$\beta$-nf）的
-		\item 如果存在 N 使得 $M =_\beta N$，则称 M 具有 $\beta$-范式 N，或称 M 是可 $\beta$-常化（$\beta$-normalising）的。
+		\item 如果 M 不能进行 $\beta$-规约，则 M 是满足 $\beta$-标准形式（$\beta$-nf）的
+		\item 如果存在 N 使得 $M =_\beta N$，则称 M 具有 $\beta$-标准形式 N，或称 M 是可 $\beta$-标准化（$\beta$-normalising）的。
 	\end{enumerate}
 
-	记 M 的 $\beta$-范式为 M 的输出。
+	记 M 的 $\beta$-标准形式为 M 的输出。
 
 \subsection{引理}
 
-	当 M 满足 $\beta$-范式，那么 $M \twoheadrightarrow_\beta N$ 隐含 $M \equiv N$。
+	当 M 满足 $\beta$-标准形式，那么 $M \twoheadrightarrow_\beta N$ 隐含 $M \equiv N$。
 
 \subsection{规约路径（reduction path）}
 
@@ -240,7 +240,7 @@
 \subsection{Weak/strong normalisation}
 
 	\begin{enumerate}
-		\item 如果存在 $\beta$-范式 N，使得 $M \twoheadrightarrow_\beta N$，称 M 为 weakly normalising
+		\item 如果存在 $\beta$-标准形式 N，使得 $M \twoheadrightarrow_\beta N$，称 M 为 weakly normalising
 		\item 如果不存在以 M 出发的无限规约路径，则称 M 为 strongly normalising
 	\end{enumerate}
 
@@ -257,8 +257,8 @@
 \subsection{引理}
 
 	\begin{enumerate}
-		\item 如果 N 是 M 的 $\beta$-范式，那么 $M \twoheadrightarrow_\beta N$
-		\item 一个 $\lambda$-项至多有一个 $\beta$-范式
+		\item 如果 N 是 M 的 $\beta$-标准形式，那么 $M \twoheadrightarrow_\beta N$
+		\item 一个 $\lambda$-项至多有一个 $\beta$-标准形式
 	\end{enumerate}
 
 	非正式表述如下：
