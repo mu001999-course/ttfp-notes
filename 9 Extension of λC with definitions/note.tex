@@ -168,4 +168,39 @@
 		\end{thm}
 
 	\section{定义展开以及$\delta$-变换（$\delta$-conversion）}
+	\noindent
+	关于定义有一个重要的方面还没有形式化：使用被定义的常量表示定义的实体。也即需要形式化在定义了一个常量之后，常量和实体之间需要可以互相替换。
+		
+		与$\beta$-规约类似，我们首先引入单步定义展开或称$\delta$-规约，需要注意的是，这个展开始终关联于定义所出现的环境$\Delta$。
+		
+		\begin{thm}（单步定义展开；单步$\delta$-规约，$\stackrel{\Delta}{\rightarrow}$）\\
+			若$\Gamma\triangleright a(\overline{x}):=M:N$是环境$\Delta$中的一个元素，则：\\
+			(1) (Basis) $a(\overline{U})\stackrel{\Delta}{\rightarrow}M\left[\overline{x}:=\overline{U}\right]$\\
+			(2) (Compatibility) 若$M\stackrel{\Delta}{\rightarrow}M'$，则$ML\stackrel{\Delta}{\rightarrow}M'L,LM\stackrel{\Delta}{\rightarrow}LM',\lambda x.M\stackrel{\Delta}{\rightarrow}\lambda x.M'$以及$b(...,M,...)\stackrel{\Delta}{\rightarrow}b(...,M',...)$
+		\end{thm}
+	
+		其中 Compatibility (2) 将是 (1) 扩展到子表达式。以及符号$\stackrel{\Delta}{\rightarrow}$简写了$\stackrel{\Delta}{\rightarrow}_\beta$。$\delta$-规约与$\beta$-规约的区别在于，每次$\delta$-规约只替换一个定义的一次出现，而$\beta$-规约则替换所有相同的绑定变量。
+		
+		$\stackrel{\Delta}{\rightarrow}$的逆关系被称作（单步）折叠（folding）：若$M\stackrel{\Delta}{\rightarrow}M'$，则$M$是在$M'$中折叠一个确定的实例化实体的结果。
+		
+		与$\rightarrow_\beta$扩展到$\twoheadrightarrow_\beta,=_\beta$相似的，也定义了概念“关联$\Delta$的零或多步$\delta$-规约，$\stackrel{\Delta}{\twoheadrightarrow}$”和“关联$\Delta$的$\delta$-变换，$\stackrel{\Delta}{=}$”：
+		
+		\begin{thm}（$\delta$-规约（零或多步），$\stackrel{\Delta}{\twoheadrightarrow}$）\\
+			记$M\stackrel{\Delta}{\twoheadrightarrow}N$，若存在$n$个表达式$M_0$到$M_n$，且$M_0\equiv M$，$M_n\equiv N$以及对于所有$0\le i\lg n$有$M_i\stackrel{\Delta}{\rightarrow}M_{i+1}$。
+		\end{thm}
+	
+		\begin{thm}（$\delta$-变换，$\stackrel{\Delta}{=}$）\\
+			记$M\stackrel{\Delta}{=}N$，若存$n$个表达式$M_0$到$M_n$，且$M_0\equiv M$，$M_n\equiv N$以及对于所有$0\le i\lg n$有$M_i\stackrel{\Delta}{\rightarrow}M_{i+1}$或$M_{i+1}\stackrel{\Delta}{\rightarrow}M_i$。
+		\end{thm}
+	
+		因此，$M$和$N$是可$\delta$-变换的，当其中一个可以由另一个经过若干次的定义展开或折叠时。以及，关系$\stackrel{\Delta}{=}$具有自反性（reflexive），对称性（symmetric）和传递性（transitive）。
+		
+		同样，与$\beta$-规约类似，定义一个表达式的$\delta$-标准形式（$\delta-normal form$），关于一个环境$\Delta$：
+		
+		\begin{thm}（可展开的（unfoldable），$\delta$-标准形式，$\delta$-nf）\\
+			令$\Delta$是一个环境\\
+			(1) 如果一个常量$a$被约束到$\Delta$中的一个描述性定义，则$a$是关于$\Delta$可展开的（unfoldable）。\\
+			(2) 如果$K$中不存在关于$\Delta$可展开的常量，则$K$满足关于$\Delta$的标准形式。\\
+			(3) 如果存在满足关于$\Delta$的标准形式的$L$使得$K\stackrel{\Delta}{=}L$，则$K$具有一个关于$\Delta$的标准形式。也可以说$K$是可$\delta$-标准化的，以及$L$是$K$的$\delta$-标准形式。
+		\end{thm}
 \end{document}
