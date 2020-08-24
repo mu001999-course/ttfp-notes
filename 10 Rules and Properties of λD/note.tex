@@ -76,4 +76,23 @@
 		\includegraphics[width=0.93\linewidth]{"../imgs/10-1.png"}
 		
 		可以使用$ind(P)$用于在$\mathbb{N}$上的任意谓词$P$，通过应用推到规则($inst$)。
+		
+	\section{用于基本定义的规则}
+	\noindent
+	提供用于基本定义的推导规则。首先给出用于在环境中包含一个基本定义的规则。这个规则是($def$)的一个修改版本。
+	
+		因为基本定义中不存在定义实体，因此($def$)规则的第二个$\bf premiss$中的$M:N$修改为了$N:s$，以确保$N$是良构的：
+		
+		($def-prim$) 如果$a\notin\Delta$，则$\cfrac{\Delta;\Gamma\vdash K:L\ \ \ \Delta;\overline{x}:\overline{A}\vdash N:s}  {\Delta,\overline{x}:\overline{A}\triangleright a(\overline{x}):=\dperp:N;\Gamma\vdash K:L}$
+		
+		而对于实例化规则，唯一的修改在于定义中的$\dperp$：
+		
+		($inst-prim$) 如果$\overline{x}:\overline{A}\triangleright a(\overline{x}):=\dperp:N\in\Delta$，则$\cfrac{\Delta;\Gamma\vdash*:\square\ \ \ \Delta;\Gamma\vdash\overline{U}:\overline{A\left[\overline{x}:=\overline{U}\right]}}   {\Delta;\Gamma\vdash a(\overline{U}):N\left[\overline{x}:=\overline{U}\right]}$
+		
+		其中第一个$\bf premiss$，同样是为了保证在参数列表为空时，确保$\Delta;\Gamma$的良构。
+		
+		因为用于基本定义的规则($def-prim$)和($inst-prim$)与用于描述性定义的规则($def$)和($inst$)相似，因此值得并列，下图中框出了相关的语句，包括了两者中的相异之处：\\
+		\includegraphics[width=0.93\linewidth]{"../imgs/10-2.png"}
+		
+		以规则($def-prim$)和($inst-prim$)扩展系统$\lambda{\rm D_0}$得到的系统记为$\lambda{\rm D}$。
 \end{document}
