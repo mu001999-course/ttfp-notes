@@ -62,4 +62,35 @@
 		\includegraphics[width=0.93\linewidth]{"../imgs/11-3.png"}
 		
 		至此，通过重写证明到flag形式，以及省略一些非常明显的行，我们得到了一个flag风格的推导，与在章节11.1开头相对应的定义的表示相同。
+		
+	\section{关于$\lambda{\rm D}$中flag-风格证明的惯例}
+	\noindent
+	具有如下格式的一行：
+	
+		$c(\overline{x}):=M:N$
+	
+	\noindent
+	在一个环境$\Delta$和上下文$\Gamma$中，其中参数列表$\overline{x}$是$\Gamma$中主体变量的列表，具有三重含义：\\
+	(1) 语句$M:N$是关联$\Delta$和$\Gamma$可推导的，\\
+	(2) 定义$\mathcal{D}\equiv\Gamma\triangleright c(\overline{x}):=M:N$被添加在$\Delta$的结尾，\\
+	(3) 语句$c(\overline{x}):N$在扩展后的环境$\Delta,\mathcal{D}$和上下文$\Gamma$中是可推导的。
+	
+		通过为flag-风格的推导精确地添加“操作语义”是的这类的多重含义更形式化。在下边的例子中，记录一个推导的状态为一个环境和上下文的对$\lbrace\mathcal{D}|\Gamma\rbrace$，这个状态在上下文改变以及一个新的定义被添加时变化：\\
+		\includegraphics[width=0.93\linewidth]{"../imgs/11-4.png"}
+	
+		在这个例子中，可以看到：\\
+	- 每当一个flag提出时，上下文被扩展；当这个flag结束的时候，上下文$\Gamma$也随之收缩；\\
+	- 在一个上下文下的定义$a(\overline{x}):=M:N$表示相应的定义被添加到环境$\Delta$中，其中$\Gamma$对应于flag上下文。
+	
+		另外，语句$M:N$以及$a(\overline{x})$（隐含在$\mathcal{D}$）中，对应于两个可推导的推定：$\Delta;\Gamma\vdash M:N$和$\Delta,\mathcal{D};\Gamma\vdash a(\overline{x}):N$。
+		
+		在构建推导时，我们逐渐构造一个环境$\Delta$。可以选择任意时候从头开始一个推导，“抛弃”之前的信息。另一种方法是将所有获得的推导压缩至一个大的总体的推导，可以简单地通过将新的推导与旧的连接起来完成，从而使得所有的推定，包括定义都保持“存活”（合法以及可获得的），而缺点是会引入一些多余的推定（尤其是定义）。
+		
+		在构造一个巨大的连续的推导时，上下文会在行间增减，而环境只会越来越大，因为没有删除定义的规则。但是读者可以添加额外的规则以删除多余的定义（可以通过正式的规则证明可行）。
+		
+		不删除定义可以被证明是正当的，一个环境可以被看作是事实的列表，其中的事实重要或可能重要，记录的作为证明的推定可以始终在之后的阶段中被使用。因此，环境也作用为我们成果的一类log-book。并且存在一种自然的对应于在一个（逻辑或数学）书中构建的“知识”和提到的一个推导的log-book。
+		
+		为了流线化flag推导的表示，自此我们将使用定义格式（definition format）。也即表示推导为定义的列表。因此在flag推导中，写成$\Gamma\triangleright c(\overline{x}):=M:N$而不是$\Gamma\vdash M:N$。
+		
+		而上述惯例可能会引入不重要的被定义的名字，即在定义之后就不再使用的名字。另外，这种方式还会使得系统$\lambda{\rm D}$简化，尤其是使用flag格式表示时，因为不再有语句：语句都被嵌入于定义中。
 \end{document}
