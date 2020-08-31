@@ -93,4 +93,18 @@
 		为了流线化flag推导的表示，自此我们将使用定义格式（definition format）。也即表示推导为定义的列表。因此在flag推导中，写成$\Gamma\triangleright c(\overline{x}):=M:N$而不是$\Gamma\vdash M:N$。
 		
 		而上述惯例可能会引入不重要的被定义的名字，即在定义之后就不再使用的名字。另外，这种方式还会使得系统$\lambda{\rm D}$简化，尤其是使用flag格式表示时，因为不再有语句：语句都被嵌入于定义中。
+		
+	\section{引入和消去规则}
+	\noindent
+	本章我们以$\lambda{\rm D}$-形式化逻辑作为起点考虑$\lambda{\rm D}$用于数学形式化系统的作用，也研究这样的形式化是否可以通过“自然的”方式，接近于数学家发展理论的方式。
+	
+		在$\lambda{\rm C}$中，我们编码了谓词逻辑，$\lambda{\rm D}$具有更强的表达能力，允许我们在形式化推导中精确地注册在推导过程中使用的自然演绎规则。以证明如下的重言式为例：
+		
+		如果$\forall{x\in S}(A\Rightarrow P(x))$，则$A\Rightarrow\forall{x\in S}(P(y))$\\
+		其中谓词$P$作用于集合$S$上，$A$是一个命题。
+		
+		推导过程如下：\\
+		\includegraphics[width=0.93\linewidth]{"../imgs/11-5.png"}
+		
+		其中行(1)和(2)应用了消去规则，行(3)到(5)应用了引入规则。
 \end{document}
