@@ -63,7 +63,7 @@
 		
 		至此，通过重写证明到flag形式，以及省略一些非常明显的行，我们得到了一个flag风格的推导，与在章节11.1开头相对应的定义的表示相同。
 		
-	\section{关于$\lambda{\rm D}$中flag-风格证明的惯例}
+	\section{关于$\lambda{\rm D}$中flag-风格证明的约定}
 	\noindent
 	具有如下格式的一行：
 	
@@ -92,7 +92,7 @@
 		
 		为了流线化flag推导的表示，自此我们将使用定义格式（definition format）。也即表示推导为定义的列表。因此在flag推导中，写成$\Gamma\triangleright c(\overline{x}):=M:N$而不是$\Gamma\vdash M:N$。
 		
-		而上述惯例可能会引入不重要的被定义的名字，即在定义之后就不再使用的名字。另外，这种方式还会使得系统$\lambda{\rm D}$简化，尤其是使用flag格式表示时，因为不再有语句：语句都被嵌入于定义中。
+		而上述约定可能会引入不重要的被定义的名字，即在定义之后就不再使用的名字。另外，这种方式还会使得系统$\lambda{\rm D}$简化，尤其是使用flag格式表示时，因为不再有语句：语句都被嵌入于定义中。
 		
 	\section{引入和消去规则}
 	\noindent
@@ -110,10 +110,33 @@
 		
 	\section{用于构造性的命题逻辑的规则}
 	\noindent
-	我们始于与类型理论最密切相关的连词，也即蕴含，谬论和否定。现在我们可以给每一个对应的自然演绎规则以名字，比如，引入$\lambda{\rm D}$-常量$\perp$-in用于$\perp$-引入规则。
+	我们始于与类型理论最密切相关的连词，也即蕴含，谬论和否定。现在我们可以给每一个对应的自然演绎规则以名字，比如，引入$\lambda{\rm D}$-常量$\perp$-in用于$\perp$-引入规则，以清楚的表示自然推导的过程。
 		
 		以$\Rightarrow$为例：\\
 		\includegraphics[width=0.93\linewidth]{"../imgs/11-6.png"}
 		
 		其中，为了节省空间，flag用更紧凑的方式表示，组合相同类型的声明在同一个flag中，以及不同类型但相连的声明，以水平方式而非垂直表示。其余演绎规则不再赘述。
+		
+	\section{$\lambda{\rm D}$中逻辑推导的例子}
+	\noindent
+	推导$(A\lor B)\Rightarrow(\neg{A}\Rightarrow B)$：\\
+	\includegraphics[width=0.93\linewidth]{"../imgs/11-7.png"}
+	
+		而在后文中，还会通过更为简短的证明对象推导，对应于类型理论的风格，遵循如下约定：
+		
+		\textit{在一个flag推导中，对应自然演绎规则$\Rightarrow,\perp$和$\neg$，应经常使用类型理论的风格用于证明对象}。
+		
+	\section{省略未更改的参数列表}
+	\noindent
+	见图11.13，出现在常量后的参数列表占了大量的篇幅，但并未提供有效的信息，而当省略时，也没有信息丢失，因此可以省略未更改的参数列表，称之为参数列表约定（\textit{parameter list convention}）：\\
+	\includegraphics[width=0.93\linewidth]{"../imgs/11-8.png"}
+	
+		需要注意的是，这样会使得某些常量与变量十分相似。
+		
+	\section{用于经典命题逻辑的规则}
+	\noindent
+	不同于$\lambda{\rm D_0}$，在$\lambda{\rm D}$中，我们可以通过基本定义，引入公理ET，而DN可以通过推导得到：\\
+	\includegraphics[width=0.93\linewidth]{"../imgs/11-9.png"}
+	
+		本章的之后几节，均是定义用于各种逻辑的规则，不再赘述。
 \end{document}
