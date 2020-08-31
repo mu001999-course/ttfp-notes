@@ -20,4 +20,30 @@
 
 \begin{document}
 \maketitle
+	\section{$\lambda{\rm D}$中的形式化推导}
+	\noindent
+	在$\lambda{\rm D}$中，我们可以以更有效更优雅的方式表示逻辑，尤其是构造逻辑。在章节7.1和7.2中，我们遇到了一些$\lambda{\rm C}$中处理逻辑的“隐藏”定义。作为例子，使用$\lambda{rm D}$的标准形式表示下列三者：
+	
+	\noindent
+	\textit{Absurdity}\\
+	$\lambda{\rm C}$使用$\perp$表示$\Pi\alpha:*.\alpha$，行为与描述性定义相同，在$\lambda{\rm D}$中可以写作：
+	
+		$\emptyset\triangleright\perp():=\Pi\alpha:*.\alpha:*$。
+		
+	\noindent
+	\textit{Negation}\\
+	之前使用$\neg A$作为$A\rightarrow\perp$的简写，同样也是一个描述性定义：
+	
+		$A:*\triangleright\neg(A):=A\rightarrow\perp():*$。
+	
+	\noindent
+	\textit{Conjunction}\\
+	同样的，我们可以定义合取，具有了两个参数：
+	
+		$A:*,B:*\triangleright\land(A,B):=\Pi C:*.(A\rightarrow B\rightarrow C)\rightarrow C:*$。
+		
+		形如以上的逻辑定义在$\lambda{\rm D}$中能够被形式化推导。因为需要先推导出定义实体之后，才能够在环境中添加定义。比如$\neg$的定义的一个$\lambda{\rm D_0}$-推导：\\
+		\includegraphics[width=0.93\linewidth]{"../imgs/11-1.png"}
+		
+		通常来说，推导会从底端开始，也即需要考虑如果能够到达最后的推定。需要从推导规则，不断从$\bf conclusion$反推所需要的$\bf premiss$。
 \end{document}
