@@ -111,4 +111,21 @@
 		
 		传递性的证明使用了替代性：\\
 		\includegraphics[width=0.93\linewidth]{"../imgs/12-10.png"}
+		
+	\section{唯一存在}
+	\noindent
+	引理 12.1.2 的证明中的大部分我们已经成功翻译，但是证明中的最后一个语句，这个引理本身以及相关联的定义 12.1.1，尚未翻译到$\lambda{\rm D}$。
+	
+		首先形式化描述“最小元”定义：\\
+		\includegraphics[width=0.93\linewidth]{"../imgs/12-11.png"}
+		
+		使用以大写$L$开头的名字$Least$表示最小元，而后边的章中，会使用$least$表示$S$中一个子集的一个最小元。
+		
+		接下来的问题是如何表示存在的唯一性？首先，我们已经拥有了存在量词，显然存在量词表示存在至少一个，因此，我们可以写作$\exists^{\ge 1}$而非只是$\exists$。相对应的，我们可以通过$\exists^{\le 1}$表示存在至多一个，形式化的表示为$\forall y,z:S.(P(y)\Rightarrow P(z)\Rightarrow y=_S z)$，也即不存在两个不同的元素满足谓词$P$，若两个元素同时满足谓词，则这两个元素相等。此时可以通过两者合取表示仅存在一个元素满足谓词$P$：\\
+		\includegraphics[width=0.93\linewidth]{"../imgs/12-12.png"}
+		
+		可观察到图12.9中的$a_9$的类型正是至多存在一个最小元。因此，现在我们可以完成证明：\\
+		\includegraphics[width=0.93\linewidth]{"../imgs/12-13.png"}
+		
+		$a_11$为“仅存在一个最小元”的证明。
 \end{document}
