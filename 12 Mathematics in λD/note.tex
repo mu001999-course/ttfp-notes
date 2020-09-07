@@ -89,4 +89,16 @@
 		
 		第二种方式，令谓词为$\lambda z:S.(fx=_T fz)$，由自反性可以得到$fx=_T fx$，再由替代性可以得到$fx=_T fy$，需要注意的是，第一个$x$是抽象中的自由变量，证明过程如下：\\
 		\includegraphics[width=0.93\linewidth]{"../imgs/12-6.png"}
+		
+	\section{序，Orders}
+	\noindent
+	在知道如何编码“相等”后，还需要知道引理 12.1.2 的证明中起到重要作用的其它关系，也即符号`$\le$'表示的序关系。与`='相似，$\le:S\rightarrow S\rightarrow*_p$，为了便于阅读，我们使用$x\le_S y$表示在集合$S$中的元素$x$和$y$上应用关系$\le$。形式化定义“偏序”（即偏序关系所具有的类型）：\\
+	\includegraphics[width=0.93\linewidth]{"../imgs/12-7.png"}
+	
+		可以看到$\le$是具有自反性，传递性和反对称性的关系。
+		
+		现在可以证明由$x\le y\land y\le x\Rightarrow x=y$，也即图 12.1 中的 $t_3$：\\
+		\includegraphics[width=0.93\linewidth]{"../imgs/12-8.png"}
+		
+		可以看到，证明主要依赖于偏序关系的反对称性。
 \end{document}
