@@ -127,5 +127,23 @@
 		可观察到图12.9中的$a_9$的类型正是至多存在一个最小元。因此，现在我们可以完成证明：\\
 		\includegraphics[width=0.93\linewidth]{"../imgs/12-13.png"}
 		
-		$a_11$为“仅存在一个最小元”的证明。
+		$a_{11}$为“仅存在一个最小元”的证明。
+	
+	\section{描述符$\iota$}
+	\noindent
+	在传统数学中，暗含了我们可以通过一个名字区分一个最小元（least element），通常会说是$S$的关于$\le$的$the\ minimum$。需要注意的是，如果唯一性尚未证明，则我们只能说$a\ minimum$（与最小元相同），而唯一性只允许我们称之为$the\ minimum$。
+	
+		在数学的一些领域中，描述符$\iota$用于命名这样唯一存在的元素：$\iota_{x\in S}(P(x))$表示$S$中唯一具有性质$P(x)$的元素$x$。因此通过这种记号，集合$S$中关于关系$\le$的$the\ minimum$是$\iota_{m\in S}(Least(S,\le,m))$。在$\lambda{\rm D}$中，我们可以定义描述符$\iota$：\\
+		\includegraphics[width=0.93\linewidth]{"../imgs/12-14.png"}
+		
+		现在我们可以使用描述符$\iota$证明如下引理：\\
+		\includegraphics[width=0.93\linewidth]{"../imgs/12-15.png"}
+		
+		即：若在集合$S$上的谓词$P$，若只存在一个$S$中的元素$x$令$P(x)$成立，则对于所有$S$中的元素$z$，若$P(z)$成立，则$z=_S \iota_{x\in S}(P(x))$。证明如下：\\
+		\includegraphics[width=0.93\linewidth]{"../imgs/12-16.png"}
+		
+		此时我们可以重新更为紧凑地表示引理 12.1.2，即“令$\le$是$S$上的偏序关系；如果$S$有最小元$x$，则$x$是$S$中的$the\ minimum$”，证明如下：\\
+		\includegraphics[width=0.93\linewidth]{"../imgs/12-17.png"}
+		
+		需要注意的是，该证明仍然需要未重新表述前地引理的证明。
 \end{document}
