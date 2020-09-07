@@ -77,4 +77,16 @@
 		
 		而相等还满足替代性（substitutivity），也即“对所有在$S$上的谓词$P$，如果$x=_S y$且$Px$成立，则$Py$”也成立，则当在任意命题中出现的$t_1$以及$t_1=_S t_2$，使用$t_2$替换$t_1$不影响命题的真值。\\
 		\includegraphics[width=0.93\linewidth]{"../imgs/12-4.png"}
+		
+	\section{相等的一致性}
+	\noindent
+	一致性与替代性相似，但一致性关注以集合而非命题作为域的函数。一致性即“对所有的函数$f:S\rightarrow T$且$x,y:S$，如果$x=_S y$，则$fx=_T fy$”。
+	
+		我们将使用$x=_S y$推导结果$fx=_T fy$，因此需要找到一个合适的谓词。首先展开目标$fx=_T fy$为$\Pi Q:T\rightarrow*_p.(Q(fx)\Leftrightarrow Q(fy))$。
+		
+		第一种方式，令谓词为$\lambda z:S.Q(fz)$，由替代性可以得到$Q(fy)$，证明过程如下：\\
+		\includegraphics[width=0.93\linewidth]{"../imgs/12-5.png"}
+		
+		第二种方式，令谓词为$\lambda z:S.(fx=_T fz)$，由自反性可以得到$fx=_T fx$，再由替代性可以得到$fx=_T fy$，需要注意的是，第一个$x$是抽象中的自由变量，证明过程如下：\\
+		\includegraphics[width=0.93\linewidth]{"../imgs/12-6.png"}
 \end{document}
