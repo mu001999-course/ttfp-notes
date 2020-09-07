@@ -45,4 +45,36 @@
 		$\it{Q3}$ 如何表达$S$拥有一个最小元？\\
 		$\it{Q4}$ 如何表达最小元的唯一性？\\
 		$\it{Q5}$ 如何证明最小元的唯一性，也即$t_4$是什么？
+		
+	\section{相等}
+	\noindent
+	相等显然是两个参数之间的关系：对于一对元素$x$和$y$，有命题$x=y$。又因为在类型理论中，每个元素都应具有一个类型；所以假设$S$是$x$和$y$的类型。故我们可以将相等看作是在$S$上的二元谓词。写作$x=_S y$以表示$S$中的$x$和$y$相等。
+	
+		所以，相等是一个参数化的二元关系：对每一个类型$S$，有一个相等关系$=_S:S\rightarrow S\rightarrow*$，作用于类型为$S$的项。
+		
+		现在，核心问题是：$S$中的元素$x$和$y$“相等”意味着什么？德国数学家莱布尼兹（G.W. Leibniz，1646-1716）给出的一个富有哲学的答案是，如果两个对象在所有可能的环境中都是不可分辨的，则这两个对象是相等的。可以更简洁地表示为：“对任意在$S$上的谓词$P$，$Px$的有效性等价于$Py$的有效性”，也即，对于给定的$P$，要么$Px$和$Py$都成立，要么两者都不成立。在这种情况下，没有可能分辨$x$和$y$，故两者相等。
+		
+		莱布尼兹对于相等的看法可以作为描述性定义在$\lambda{\rm D}$中进行形式化，形式化地定义$eq(S,x,y)$表示$S$中的元素$x$和$y$的相等，为
+		
+		$\Pi P:S\rightarrow*_p.(Px\Leftrightarrow Py)$
+		
+		甚至更为简单的定义也可以，即：
+		
+		$\Pi P:S\rightarrow*_p.(Px\Rightarrow Py)$
+		
+		使用图 12.2 显示这个被定义的相等时一个满足自反性的关系。使用名字$eq$-$refl(S,x)$表示自反性的证明。\\
+		\includegraphics[width=0.93\linewidth]{"../imgs/12-3.png"}
+		
+		需要注意的是，我们得到的是相等的二阶定义，因为$\Pi$抽象的谓词$P:S\rightarrow*:\square$是二阶的，所以公式中的$\Pi$是一个二阶全称量词。
+		
+		在图 12.2 中的推导中存在一个空，即行(2)中，$Px\Leftrightarrow Px$的证明，有两种方式解决：
+		
+		(1) 特定的方法（ad-hoc approach）：也即找到$Px\Leftrightarrow Px$的成员，使用表达式$\Leftrightarrow{-in}(Px,Px,\lambda u:Px.u,\lambda u:Px.u)$即可。
+		
+		(2) 通用方法：首先证明一个引理，即$A\Leftarrow A$对于任意的$A:*_p$都成立，命名这个证明为$\Leftrightarrow{-refl}(A)$，然后使用表达式$\Leftrightarrow{-refl}(Px)$填空即可。
+		
+		为便于阅读，使用记号$x=_S y$表示$eq(S,x,y)$。
+		
+		而相等还满足替代性（substitutivity），也即“对所有在$S$上的谓词$P$，如果$x=_S y$且$Px$成立，则$Py$”也成立，则当在任意命题中出现的$t_1$以及$t_1=_S t_2$，使用$t_2$替换$t_1$不影响命题的真值。\\
+		\includegraphics[width=0.93\linewidth]{"../imgs/12-4.png"}
 \end{document}
