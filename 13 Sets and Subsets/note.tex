@@ -91,4 +91,50 @@
 		
 		图13.8中，证明对于一个子集，如果它不是空集，则至少包含一个元素：\\
 		\includegraphics[width=0.93\linewidth]{"../imgs/13-7.png"}
+		
+	\section{关系}
+	\noindent
+	在已经知道如何在$\lambda{\rm D}$中表示集合后，将了解与集合有关的概念。首先是关系。
+	
+		一个关系在$S$上的关系是一个在$S$上的二元谓词，具有类型$S\rightarrow S\rightarrow *_p$。在之前提到过，关系可能具有一些具体的性质，比如自反性，对称性或者传递性。一个具有这三个性质的关系被称作等价关系。这些关系在$\lambda{\rm D}$中易于表示：\\
+		\includegraphics[width=0.93\linewidth]{"../imgs/13-8.png"}
+		
+		同样可以定义在子集上的关系的性质，比如：
+		
+		$refl-subset(S,V,R):=\forall x:S.(x\varepsilon V\Rightarrow Rxx)$。
+		
+		一个等价关系可以将集合切分为非空的若干等价类：$x$的等价类包含所有与$x$具有该等价关系的$y$。在图13.10中定义，使用$\left[x\right]_R$简写表示$class(S,R,u,x)$，省略两个参数：\\
+		\includegraphics[width=0.93\linewidth]{"../imgs/13-9.png"}
+		
+		等价类具有三个重要性质：\\
+		\includegraphics[width=0.93\linewidth]{"../imgs/13-10.png"}
+		
+		证明与(2)等价的命题：$\forall x,y,z:S.(z\varepsilon\left[x\right]_R\Rightarrow z\varepsilon\left[y\right]_R\Rightarrow(\left[x\right]_R=\left[y\right]_R))$：\\
+		\includegraphics[width=0.93\linewidth]{"../imgs/13-11.png"}
+		
+		至此，我们已经讨论了在一个类型$S$上的关系$R$，一个自然的扩展是在一对类型（比如$S$和$T$）上的关系，这样的一个关系的显然表示具有类型$S\rightarrow T\rightarrow*_p$。
+		
+	\section{映射}
+	\noindent
+	映射可以看作是一类特殊的关系，更确切地说：从集合$S$到集合$T$的映射是一个关系$F:S\rightarrow T\rightarrow*_p$，即：
+	
+		$\forall_{x\in S}\exists^1_{y\in T}(Fxy)$
+		
+		所以将一个关系变成映射的关键性质为每一个$x\in S$都和一个确定的$y\in T$具有一个关系。称这样的一个关系为函数式关系。由于与$x$关系的$y$的唯一性，通常将$F$作为一个一元符号以及写作$F(x)=y$而非$Fxy$。
+		
+		作为一个$\Pi$-类型的成员的映射与作为一个函数式关系的映射之间的关联很容易确定：\\
+		\includegraphics[width=0.93\linewidth]{"../imgs/13-12.png"}
+		
+		即，由一个抽象可以得到一个函数式关系，而由一个函数式关系，也可以得到一个抽象。前者称作是类型理论格式的映射，而我们将继续使用类型理论格式表示，因为它在我们的框架中更为基础。
+		
+		映射$F:S\rightarrow T$可能具有诸如内射性，满射性以及双射性。同样可以直接表达的概念式一个满足双射性映射的逆：\\
+		\includegraphics[width=0.93\linewidth]{"../imgs/13-13.png"}
+		
+		当函数$F$的域非类型$S$而是子类时，情况会变得有一些复杂，如：
+		\includegraphics[width=0.93\linewidth]{"../imgs/13-14.png"}
+		
+		其它概念同样易于形式化，给定集合$S$和$T$，以及一个函数$F:S\rightarrow T$：\\
+		- 源集合$S$的一个子集$V$的$F$-像；$V$的像是$T$的一个子集，包括$V$中元素对用的所有$F$-值。\\
+		- 范围集合$T$的一个子集$W$的$F$-原像；$W$的原像是$S$的子集，包括所有在$W$中具有$F$-值的元素。\\
+		\includegraphics[width=0.93\linewidth]{"../imgs/13-15.png"}
 \end{document}
