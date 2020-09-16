@@ -81,4 +81,14 @@
 		
 		莱布尼兹等价易于证明子集等价，但翻转之后不能构建出我们需要的证明。因此需要添加另一个公理：\\
 		\includegraphics[width=0.93\linewidth]{"../imgs/13-5.png"}
+		
+	\section{特殊的子集}
+	\noindent
+	另一个关于集合的基础概念是空集，不包含任何元素的集合。在我们使用幂集作为子集的类型时，我们不能获得一个通用的空集，必须定义对于每个类型$S:*_s$，有一个关于给定$S$的空集$\emptyset(S)$。这样的一个$\emptyset(S)$（表示为$\emptyset_S$）是$S$的一个子集，编码为$S$上的谓词$\lambda x:S.\perp$。
+	
+		同样定义$S$的全子集，包含$S$中的所有元素，编码为谓词$\lambda x:S.\neg\perp$：\\
+		\includegraphics[width=0.93\linewidth]{"../imgs/13-6.png"}
+		
+		图13.8中，证明对于一个子集，如果它不是空集，则至少包含一个元素：\\
+		\includegraphics[width=0.93\linewidth]{"../imgs/13-7.png"}
 \end{document}
