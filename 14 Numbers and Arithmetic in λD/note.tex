@@ -21,4 +21,22 @@
 
 \begin{document}
 \maketitle
+	\section{用于自然数的皮亚诺公理}
+	\noindent
+	皮亚诺假设存在一个集合$\mathbb{N}$，一个特殊的成员0，以及一个由$\mathbb{N}$到$\mathbb{N}$的函数$s$。所以在$\mathbb{N}$中，我们有成员0，$s(0)$，$s(s(0))$等，表示0，1，2等。
+	
+		之后，皮亚诺通过添加公理，使得这些形式化的数字行为符合预期。为了保证函数$s$一定产生新的数字，皮亚诺添加了两条公理：
+		
+		$ax{-}nat_1:\ \forall_{x\in\mathbb{N}}(s(x)\not=0)$
+		
+		$ax{-}nat_2:\ \forall_{x,y\in\mathbb{N}}(s(x)=s(y)\Rightarrow x=y)$
+		
+		公理$ax{-}nat_2$表示$s$是一个内射的函数，而$ax{-}nat_1$隐含了$s$不是满射的。这两条公理决定了不同层数$s$的自然数不相同。
+		
+		除此之外，皮亚诺还添加了另一条公理，以通过数学归纳法确定所有自然数的性质：
+		
+		$ax{-}nat_3:\ (P0\land\forall x:\mathbb{N}.(Px\Rightarrow P(sx)))\Rightarrow\forall x:\mathbb{N}.Px$
+		
+		\begin{lemma} 对于所有$n\in\mathbb{N}:n=0\lor\exists_{m\in\mathbb{N}}(n=s(m))$
+		\end{lemma}
 \end{document}
