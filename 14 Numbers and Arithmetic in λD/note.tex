@@ -23,7 +23,7 @@
 \maketitle
 	\section{用于自然数的皮亚诺公理}
 	\noindent
-	皮亚诺假设存在一个集合$\mathbb{N}$，一个特殊的成员0，以及一个由$\mathbb{N}$到$\mathbb{N}$的函数$s$。所以在$\mathbb{N}$中，我们有成员0，$s(0)$，$s(s(0))$等，表示0，1，2等。
+	皮亚诺假设存在一个集合$\mathbb{N}$，一个特定的成员0，以及一个由$\mathbb{N}$到$\mathbb{N}$的后继函数$s$。所以在$\mathbb{N}$中，我们有成员0，$s(0)$，$s(s(0))$等，表示0，1，2等。
 	
 		之后，皮亚诺通过添加公理，使得这些形式化的数字行为符合预期。为了保证函数$s$一定产生新的数字，皮亚诺添加了两条公理：
 		
@@ -31,7 +31,7 @@
 		
 		$ax{-}nat_2:\ \forall_{x,y\in\mathbb{N}}(s(x)=s(y)\Rightarrow x=y)$
 		
-		公理$ax{-}nat_2$表示$s$是一个内射的函数，而$ax{-}nat_1$隐含了$s$不是满射的。这两条公理决定了不同层数$s$的自然数不相同。
+		公理$ax{-}nat_2$表示$s$是一个单射的函数，而$ax{-}nat_1$隐含了$s$不是满射的。这两条公理决定了不同层数$s$的自然数不相同。
 		
 		除此之外，皮亚诺还添加了另一条公理，以通过数学归纳法确定所有自然数的性质：
 		
@@ -39,4 +39,27 @@
 		
 		\begin{lemma} 对于所有$n\in\mathbb{N}:n=0\lor\exists_{m\in\mathbb{N}}(n=s(m))$
 		\end{lemma}
+	
+	\section{以公理方式引入整数}
+	\noindent
+	整数的公理化假设存在一个$\mathbb{Z}$，一个特定的成员0，以及一个由$\mathbb{Z}$到$\mathbb{Z}$的后继函数$s$。包含如下公理：\\
+	\includegraphics[width=0.93\linewidth]{"../imgs/14-1.png"}
+		
+		公理$ax{-}int_1$表示$s$是一个双射函数：单射以及满射。由满射性可得，对于所有$y\in\mathbb{Z}$，存在一个$x\in\mathbb{Z}$，使得$s(x)=y$。由单射性可得，$y$确定时，满足$s(x)=y$的$x$是唯一的。
+		
+		行(14)中定义的$p$，$p(y)$表示$y$的前驱，也即$s(x)=y$中的$x$，可以发现，$p$是$s$的逆函数。
+		
+		除了上图中出现的公理$ax{-}int_1$，还有公理$ax{-}int_2$，也即用于整数的归纳法，与自然数的版本相比较，在增加了前驱方向的归纳：\\
+		\includegraphics[width=0.93\linewidth]{"../imgs/14-2.png"}
+		
+		此时我们可以将从0“向上”的整数，也即自然数，作为$\mathbb{Z}$的一个子集$\mathbb{N}$：\\
+		\includegraphics[width=0.93\linewidth]{"../imgs/14-3.png"}
+		
+		其中$nat{-}cond(P)$表示$P$满足自然数的归纳法的谓词，也即覆盖了所有的自然数，可以看到，如果一个整数$x$对于任意满足$nat{-}cond$的谓词$P$，都有$Px$成立，则$x$是一个自然数。而满足$nat{-}cond$的谓词并不一定只作用于自然数，所以$nat{-}smallest$表示了$\mathbb{N}$是这些子集中的最小子集。
+		
+		但目前仍存在一个问题，整数集合$\mathbb{Z}$不能保证其的左右是无限的，比如对于集合$\{a,b,c,d\}$，令$a=0$，有$s(a)=b,s(b)=c,s(c)=d,s(d)=a$，$s$同样是双射的，并且适用于归纳法。解决方式是添加一个公理，以确保0的前驱不是自然数：
+		
+		$ax{-}int_3:=\dperp:\neg(p0\ \varepsilon\ \mathbb{N})$
+		
+		至此我们拥有了整数，自然数，以及负数。
 \end{document}
