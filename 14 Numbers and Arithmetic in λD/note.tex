@@ -73,4 +73,33 @@
 		\noindent\includegraphics[width=0.93\linewidth]{"../imgs/14-4.png"}\\
 		\includegraphics[width=0.93\linewidth]{"../imgs/14-5.png"}\\
 		\includegraphics[width=0.93\linewidth]{"../imgs/14-6.png"}
+	
+	\section{整数加法}
+	\noindent
+	为了计算形式化的数字，形式化算术运算。首先是加法，通过如下形式的递归定义：
+	
+		(\rmnum{1}) $m + 0 = m$，
+		
+		(\rmnum{2}) $m + s(n) = s(m + n)$。
+		
+		可以发现$m$没有变动，递归基于第二个操作数，因此可以重新表述为：
+		
+		(\rmnum{1}) $+_m(0)=m$，
+		
+		(\rmnum{2}) $+_m(s(n))=s(+_m(n))$。
+		
+		而对于操作数是负数的情况，可以由(ii)推导得到，因此，对于整数而言，这两个定义足够。
+		
+		用于整数的良构递归定义：\\
+		\includegraphics[width=0.93\linewidth]{"../imgs/14-7.png"}
+		
+		对于一个能够终止的作用于整数集合的递归定义，存在一个唯一的函数$g$满足。形式化为：\\
+		\includegraphics[width=0.93\linewidth]{"../imgs/14-8.png"}
+		
+		而如果给定的函数$f$是一个双射函数，则可以定义良构递归为：\\
+		\includegraphics[width=0.93\linewidth]{"../imgs/14-9.png"}
+		
+		在$\lambda{\rm D}$中形式化$+_m$以及$+$：\\
+		\includegraphics[width=0.93\linewidth]{"../imgs/14-10.png"}\\
+		\includegraphics[width=0.93\linewidth]{"../imgs/14-11.png"}
 \end{document}
