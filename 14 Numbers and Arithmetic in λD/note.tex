@@ -102,4 +102,43 @@
 		在$\lambda{\rm D}$中形式化$+_m$以及$+$：\\
 		\includegraphics[width=0.93\linewidth]{"../imgs/14-10.png"}\\
 		\includegraphics[width=0.93\linewidth]{"../imgs/14-11.png"}
+	
+	\section{$\lambda{\rm D}$中基础计算的一个例子}
+	\noindent
+	证明$1+2=3$：\\
+	\includegraphics[width=0.93\linewidth]{"../imgs/14-12.png"}
+	
+	\section{用于加法的算术公理}
+	\noindent\includegraphics[width=0.93\linewidth]{"../imgs/14-13.png"}
+	
+	\section{用于自然数和负数的加法下的闭包}
+	\noindent\includegraphics[width=0.93\linewidth]{"../imgs/14-14.png"}\\
+	\includegraphics[width=0.93\linewidth]{"../imgs/14-15.png"}\\
+	\includegraphics[width=0.93\linewidth]{"../imgs/14-16.png"}
+	
+	\section{整数减法}
+	\noindent
+	定义减法：$x-y:=\iota_{z:\mathbb{Z}}(z+y=x)$。性质不再赘述。
+	
+	\section{整数的相反数}
+	\noindent
+	定义相反数：$-x:=0-x$。
+	
+	\section{整数上的非相等关系}
+	\noindent
+	定义$\le_{\mathbb{Z}}:=\lambda x:\mathbb{Z}.\lambda y:\mathbb{Z}.(y-x\ \varepsilon\ \mathbb{N}):\mathbb{Z}\rightarrow\mathbb{Z}\rightarrow*_p$。\\定义$<_{\mathbb{Z}}:=\lambda x:\mathbb{Z}.\lambda y:\mathbb{Z}.(x\le_{\mathbb{Z}}y\land x\not=y):\mathbb{Z}\rightarrow\mathbb{Z}\rightarrow*_p$。
+	
+	\section{整数乘法}
+	\noindent
+	定义乘法为：
+	
+		(\rmnum{1}) $m·0=0$，
+		
+		(\rmnum{2}) $m·s(n)=(m·n)+m$。
+		
+	\section{可除性}
+	\noindent
+	定义可除性为：$m$可以整除$n$，如果存在$q:\mathbb{Z}$使得$m·q=n$。
+	
+		需要注意的是，可除性在自然数上是一个偏序关系。
 \end{document}
